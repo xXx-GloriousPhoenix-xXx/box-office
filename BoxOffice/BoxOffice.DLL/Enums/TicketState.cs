@@ -1,4 +1,4 @@
-﻿namespace BoxOffice.DLL.Enums
+﻿namespace BoxOffice.DAL.Enums
 {
     public enum TicketState
     {

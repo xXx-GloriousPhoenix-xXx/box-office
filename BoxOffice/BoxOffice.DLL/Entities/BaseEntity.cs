@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BoxOffice.DLL.Entities
+namespace BoxOffice.DAL.Entities
 {
     public class BaseEntity
     {

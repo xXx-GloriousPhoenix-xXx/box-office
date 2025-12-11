@@ -1,0 +1,13 @@
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\BoxOffice.DLL.csproj.AssemblyReference.cache
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\BoxOffice.DLL.GeneratedMSBuildEditorConfig.editorconfig
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\BoxOffice.DLL.AssemblyInfoInputs.cache
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\BoxOffice.DLL.AssemblyInfo.cs
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\BoxOffice.DLL.csproj.CoreCompileInputs.cache
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\BoxOffice.DLL.sourcelink.json
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\bin\Debug\net10.0\BoxOffice.DLL.deps.json
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\bin\Debug\net10.0\BoxOffice.DLL.dll
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\bin\Debug\net10.0\BoxOffice.DLL.pdb
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\BoxOffice.DLL.dll
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\refint\BoxOffice.DLL.dll
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\BoxOffice.DLL.pdb
+F:\Programmes\Github\Reps\box-office\BoxOffice\BoxOffice.DLL\obj\Debug\net10.0\ref\BoxOffice.DLL.dll

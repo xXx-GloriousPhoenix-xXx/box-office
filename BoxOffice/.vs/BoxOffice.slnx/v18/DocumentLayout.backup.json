@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{B74B4A1D-B9ED-C442-9F15-9FCD0E31E8D1}|BoxOffice.DLL\\BoxOffice.DLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dll\\entities\\poster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B74B4A1D-B9ED-C442-9F15-9FCD0E31E8D1}|BoxOffice.DLL\\BoxOffice.DLL.csproj|solutionrelative:boxoffice.dll\\entities\\poster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,21 +9,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Poster.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DLL\\Entities\\Poster.cs",
-              "RelativeDocumentMoniker": "BoxOffice.DLL\\Entities\\Poster.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DLL\\Entities\\Poster.cs",
-              "RelativeToolTip": "BoxOffice.DLL\\Entities\\Poster.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA7wC8AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T22:42:13.634Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"

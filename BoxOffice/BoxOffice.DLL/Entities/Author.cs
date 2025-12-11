@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BoxOffice.DLL.Entities
+namespace BoxOffice.DAL.Entities
 {
     [Table("authors")]
     public class Author : BaseEntity

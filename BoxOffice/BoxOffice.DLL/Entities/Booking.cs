@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using BoxOffice.DAL.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BoxOffice.DLL.Entities
+namespace BoxOffice.DAL.Entities
 {
     [Table("bookings")]
     public class Booking : BaseEntity
@@ -27,13 +28,5 @@ namespace BoxOffice.DLL.Entities
         public virtual Customer? Customer { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; } = [];
-    }
-
-    public enum BookingStatus
-    {
-        Active,
-        Completed,
-        Cancelled,
-        Expired
     }
 }

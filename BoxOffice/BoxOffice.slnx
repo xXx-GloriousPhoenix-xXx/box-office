@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="BoxOffice.DLL/BoxOffice.DLL.csproj" />
+  <Project Path="F:/Programmes/Github/Reps/box-office/BoxOffice/BoxOffice.DLL/BoxOffice.DAL.csproj" />
+  <Project Path="F:/Programmes/Github/Reps/box-office/BoxOffice/BoxOffiec.BLL/BoxOffice.BLL.csproj" Id="5277179c-fb3d-4742-b3b5-deab99031a22">
+    <BuildDependency Project="F:/Programmes/Github/Reps/box-office/BoxOffice/BoxOffice.DLL/BoxOffice.DAL.csproj" />
+  </Project>
 </Solution>

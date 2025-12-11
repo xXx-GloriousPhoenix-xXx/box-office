@@ -1,7 +1,7 @@
-﻿using BoxOffice.DLL.Enums;
+﻿using BoxOffice.DAL.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BoxOffice.DLL.Entities
+namespace BoxOffice.DAL.Entities
 {
     [Table("transactions")]
     public class Transaction : BaseEntity

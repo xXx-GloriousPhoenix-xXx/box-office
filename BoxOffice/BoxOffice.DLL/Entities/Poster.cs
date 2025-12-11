@@ -1,7 +1,7 @@
-﻿using BoxOffice.DLL.Enums;
+﻿using BoxOffice.DAL.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BoxOffice.DLL.Entities
+namespace BoxOffice.DAL.Entities
 {
     [Table("posters")]
     public class Poster : BaseEntity
@@ -20,6 +20,12 @@ namespace BoxOffice.DLL.Entities
 
         [Column("release_date")]
         public DateOnly ReleaseDate { get; set; }
+
+        [Column("performance_venue")]
+        public required string Venue { get; set; }
+
+        [Column("performance_duration")]
+        public int DurationMinutes { get; set; }
 
         [ForeignKey(nameof(AuthorId))]
         public Author? Author { get; set; }
