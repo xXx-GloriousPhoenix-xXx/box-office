@@ -1,6 +1,9 @@
 <Solution>
-  <Project Path="F:/Programmes/Github/Reps/box-office/BoxOffice/BoxOffice.DLL/BoxOffice.DAL.csproj" />
-  <Project Path="F:/Programmes/Github/Reps/box-office/BoxOffice/BoxOffiec.BLL/BoxOffice.BLL.csproj" Id="5277179c-fb3d-4742-b3b5-deab99031a22">
-    <BuildDependency Project="F:/Programmes/Github/Reps/box-office/BoxOffice/BoxOffice.DLL/BoxOffice.DAL.csproj" />
+  <Project Path="BoxOffice.API/BoxOffice.API.csproj">
+    <BuildDependency Project="BoxOffice.BLL/BoxOffice.BLL.csproj" />
   </Project>
+  <Project Path="BoxOffice.BLL/BoxOffice.BLL.csproj">
+    <BuildDependency Project="BoxOffice.DAL/BoxOffice.DAL.csproj" />
+  </Project>
+  <Project Path="BoxOffice.DAL/BoxOffice.DAL.csproj" />
 </Solution>

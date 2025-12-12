@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DD393AC6-C2CC-05EA-39FC-75245C2CFB03}|BoxOffice.DLL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dll\\context\\boxofficedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DD393AC6-C2CC-05EA-39FC-75245C2CFB03}|BoxOffice.DLL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dll\\context\\boxofficedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C1471C8-F4A2-4BB5-B2A1-9A415DA517F6}|BoxOffice.API\\BoxOffice.API.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.api\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C1471C8-F4A2-4BB5-B2A1-9A415DA517F6}|BoxOffice.API\\BoxOffice.API.csproj|solutionrelative:boxoffice.api\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,14 +23,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "BoxOfficeDbContext.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DLL\\Context\\BoxOfficeDbContext.cs",
-              "RelativeDocumentMoniker": "BoxOffice.DLL\\Context\\BoxOfficeDbContext.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DLL\\Context\\BoxOfficeDbContext.cs",
-              "RelativeToolTip": "BoxOffice.DLL\\Context\\BoxOfficeDbContext.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAA2wBgAAAAAAAAAAAAAAA==",
+              "Title": "ReportsController.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\ReportsController.cs",
+              "RelativeDocumentMoniker": "BoxOffice.API\\Controllers\\ReportsController.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\ReportsController.cs",
+              "RelativeToolTip": "BoxOffice.API\\Controllers\\ReportsController.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAawFsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T21:21:16.22Z",
+              "WhenOpened": "2025-12-12T02:46:30.986Z",
               "EditorCaption": ""
             }
           ]
