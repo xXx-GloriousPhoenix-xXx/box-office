@@ -5,6 +5,8 @@ using BoxOffice.DAL.Context;
 using BoxOffice.DAL.Interfaces;
 using BoxOffice.DAL.Repository;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,10 +19,17 @@ builder.Services.AddScoped<IPosterService, PosterService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
 
 builder.Services.AddAutoMapper(typeof(PosterProfile).Assembly);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(
+            JsonNamingPolicy.CamelCase,
+            allowIntegerValues: false));
+    });
 
 if (builder.Environment.IsDevelopment())
 {

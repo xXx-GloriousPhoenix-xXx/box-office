@@ -5,6 +5,208 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Authors": {
+      "get": {
+        "tags": [
+          "Authors"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuthorDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuthorDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuthorDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Authors"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAuthorDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAuthorDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAuthorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Authors/{id}": {
+      "get": {
+        "tags": [
+          "Authors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Authors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAuthorDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAuthorDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAuthorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Authors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Bookings/{bookingToken}": {
       "get": {
         "tags": [
@@ -1192,13 +1394,25 @@
       },
       "BookingStatus": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "active",
+          "completed",
+          "expired",
+          "cancelled"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
+      },
+      "CreateAuthorDto": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "CreatePosterDto": {
         "required": [
@@ -1507,18 +1721,17 @@
       },
       "PosterGenre": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8
+          "action",
+          "comedy",
+          "drama",
+          "horror",
+          "sciFi",
+          "romance",
+          "musical",
+          "thriller",
+          "fantasy"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "PosterSalesDto": {
         "type": "object",
@@ -1716,25 +1929,23 @@
       },
       "TicketState": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "available",
+          "booked",
+          "sold",
+          "cancelled"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "TicketType": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
+          "economy",
+          "standard",
+          "premiumSeat",
+          "frontRow",
+          "balcony",
+          "vip"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "TicketTypeInfoDto": {
         "type": "object",
@@ -1788,13 +1999,25 @@
       },
       "TransactionType": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "purchase",
+          "refund",
+          "bookingFee",
+          "cancellation"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
+      },
+      "UpdateAuthorDto": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "UpdatePosterDto": {
         "type": "object",
@@ -1847,6 +2070,9 @@
     }
   },
   "tags": [
+    {
+      "name": "Authors"
+    },
     {
       "name": "Bookings"
     },

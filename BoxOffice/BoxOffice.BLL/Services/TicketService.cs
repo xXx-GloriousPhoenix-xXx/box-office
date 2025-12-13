@@ -8,18 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace BoxOffice.BLL.Services
 {
-    public class TicketService : ITicketService
+    public class TicketService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<TicketService> logger) : ITicketService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        private readonly ILogger<TicketService> _logger;
-
-        public TicketService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<TicketService> logger)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _logger = logger;
-        }
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly IMapper _mapper = mapper;
+        private readonly ILogger<TicketService> _logger = logger;
 
         public async Task<IEnumerable<TicketDto>> GetAvailableTicketsAsync(
             Guid posterId,
@@ -57,7 +50,6 @@ namespace BoxOffice.BLL.Services
 
             try
             {
-                // Проверяем существование клиента или создаем нового
                 Customer customer;
                 var existingCustomer = await _unitOfWork.Customers
                     .FindAsync(c => c.Email == bookDto.CustomerEmail, ct)
@@ -78,14 +70,12 @@ namespace BoxOffice.BLL.Services
                     await _unitOfWork.CompleteAsync(ct);
                 }
 
-                // Проверяем доступность мест
                 var areAvailable = await _unitOfWork.TicketRepository
                     .AreSeatsAvailableAsync(bookDto.PosterId, bookDto.SeatNumbers, ct);
 
                 if (!areAvailable)
                     throw new InvalidOperationException("Some seats are not available");
 
-                // Получаем билеты
                 var tickets = new List<Ticket>();
                 foreach (var seatNumber in bookDto.SeatNumbers)
                 {
@@ -98,7 +88,6 @@ namespace BoxOffice.BLL.Services
                     tickets.Add(ticket);
                 }
 
-                // Создаем бронирование
                 var booking = new Booking
                 {
                     CustomerId = customer.Id,
@@ -111,7 +100,6 @@ namespace BoxOffice.BLL.Services
                 _unitOfWork.Bookings.Add(booking);
                 await _unitOfWork.CompleteAsync(ct);
 
-                // Обновляем билеты
                 foreach (var ticket in tickets)
                 {
                     ticket.State = TicketState.Booked;
@@ -119,7 +107,6 @@ namespace BoxOffice.BLL.Services
                     ticket.CustomerId = customer.Id;
                     ticket.BookedUntil = booking.ExpiresAt;
 
-                    // Обновляем счетчики в TicketInfo
                     if (ticket.TicketInfo != null)
                     {
                         ticket.TicketInfo.BookedTickets++;
@@ -130,7 +117,6 @@ namespace BoxOffice.BLL.Services
                     _unitOfWork.Tickets.Update(ticket);
                 }
 
-                // Создаем транзакцию для бронирования
                 var transaction = new Transaction
                 {
                     CustomerId = customer.Id,
