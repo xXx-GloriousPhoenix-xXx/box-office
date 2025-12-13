@@ -1,36 +1,33 @@
-﻿using BoxOffice.DAL.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BoxOffice.DAL.Entities
 {
     [Table("posters")]
     public class Poster : BaseEntity
     {
-        [Column("author_id")]
-        public Guid AuthorId { get; set; }
-
-        [Column("poster_name")]
+        [Column("performance_name")]
         public required string Name { get; set; }
 
-        [Column("poster_description")]
+        [Column("performance_description")]
         public required string Description { get; set; }
 
-        [Column("poster_genres")]
-        public List<PosterGenre> Genres { get; set; } = [];
-
         [Column("release_date")]
-        public DateOnly ReleaseDate { get; set; }
+        public DateOnly Date { get; set; }
 
         [Column("performance_venue")]
         public required string Venue { get; set; }
 
         [Column("performance_duration")]
-        public int DurationMinutes { get; set; }
+        public int Duration { get; set; }
 
-        [ForeignKey(nameof(AuthorId))]
-        public Author? Author { get; set; }
+        [Column("performance_author")]
+        public Guid AuthorId { get; set; }
 
-        public ICollection<TicketInfo> TicketInfos { get; set; } = [];
-        public ICollection<Ticket> Tickets { get; set; } = [];
+        [Column(nameof(AuthorId))]
+        public required Author Author { get; set; }
+
+        public virtual ICollection<Genre> Genres { get; set; } = [];
+
+        public virtual ICollection<TicketInfo> TicketInfos { get; set; } = [];
     }
 }

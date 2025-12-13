@@ -17,10 +17,11 @@ namespace BoxOffice.DAL.Repository
         private IBaseRepository<Customer>? _customers;
         private IBaseRepository<Booking>? _bookings;
         private IBaseRepository<Transaction>? _transactions;
+        private IBaseRepository<Genre>? _genres;
 
-        private IPosterRepository? _posterRepository;
-        private ITicketRepository? _ticketRepository;
-        private IBookingRepository? _bookingRepository;
+        //private IPosterRepository? _posterRepository;
+        //private ITicketRepository? _ticketRepository;
+        //private IBookingRepository? _bookingRepository;
 
         public IBaseRepository<Author> Authors =>
             _authors ??= new BaseRepository<Author>(_context);
@@ -42,14 +43,18 @@ namespace BoxOffice.DAL.Repository
 
         public IBaseRepository<Transaction> Transactions =>
             _transactions ??= new BaseRepository<Transaction>(_context);
-        public IPosterRepository PosterRepository =>
-            _posterRepository ??= new PosterRepository(_context);
 
-        public ITicketRepository TicketRepository =>
-            _ticketRepository ??= new TicketRepository(_context);
+        public IBaseRepository<Genre> Genres =>
+            _genres ??= new BaseRepository<Genre>(_context);
 
-        public IBookingRepository BookingRepository =>
-            _bookingRepository ??= new BookingRepository(_context);
+        //public IPosterRepository PosterRepository =>
+        //    _posterRepository ??= new PosterRepository(_context);
+
+        //public ITicketRepository TicketRepository =>
+        //    _ticketRepository ??= new TicketRepository(_context);
+
+        //public IBookingRepository BookingRepository =>
+        //    _bookingRepository ??= new BookingRepository(_context);
 
         public async Task<int> CompleteAsync(CancellationToken ct = default)
         {

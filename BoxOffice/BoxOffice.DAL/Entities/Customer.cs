@@ -5,17 +5,17 @@ namespace BoxOffice.DAL.Entities
     [Table("customers")]
     public class Customer : BaseEntity
     {
-        [Column("customer_name")]
+        [Column("name")]
         public required string Name { get; set; }
-        
-        [Column("customer_email")]
+
+        [Column("email")]
         public required string Email { get; set; }
 
-        [Column("customer_phone")]
-        public string? PhoneNumber { get; set; }
+        [Column("phone_number")]
+        public required string Phone { get; set; }
 
-        public ICollection<Ticket> PurchasedTickets { get; set; } = [];
-        public ICollection<Booking> Bookings { get; set; } = [];
-        public ICollection<Transaction> Transactions { get; set; } = [];
+        public virtual ICollection<Transaction> Transactions { get; set; } = [];
+
+        public virtual ICollection<Ticket> Tickets { get; set; } = [];
     }
 }

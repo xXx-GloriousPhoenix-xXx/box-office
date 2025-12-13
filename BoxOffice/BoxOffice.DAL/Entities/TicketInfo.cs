@@ -3,33 +3,33 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BoxOffice.DAL.Entities
 {
-    [Table("tickets_info")]
+    [Table("ticket_infos")]
     public class TicketInfo : BaseEntity
     {
-        [Column("poster_id")]
+        [Column("poster")]
         public Guid PosterId { get; set; }
 
-        [Column("ticket_type")]
-        public TicketType TicketType { get; set; }
-
-        [Column("ticket_price")]
+        [Column("price")]
         public decimal Price { get; set; }
 
         [Column("total_tickets")]
-        public int TotalTickets { get; set; }
+        public int TotalCount { get; set; }
 
         [Column("available_tickets")]
-        public int AvailableTickets { get; set; }
+        public int AvailableCount { get; set; }
 
         [Column("sold_tickets")]
-        public int SoldTickets { get; set; }
+        public int SoldCount { get; set; }
 
         [Column("booked_tickets")]
-        public int BookedTickets { get; set; }
+        public int BookedCount { get; set; }
 
-        [ForeignKey(nameof(PosterId))]
-        public Poster? Poster { get; set; }
+        [Column("type")]
+        public TicketType TicketType { get; set; }
 
-        public ICollection<Ticket> Tickets { get; set; } = [];
+        [Column(nameof(PosterId))]
+        public required Poster Poster { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; } = [];
     }
 }

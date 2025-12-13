@@ -1,6 +1,6 @@
 ﻿namespace BoxOffice.DAL.Enums
 {
-    public enum BookingStatus
+    public enum BookingState
     {
         Active,
         Completed,

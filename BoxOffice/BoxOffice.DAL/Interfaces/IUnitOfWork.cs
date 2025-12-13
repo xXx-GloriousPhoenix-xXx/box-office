@@ -7,14 +7,15 @@ namespace BoxOffice.DAL.Interfaces
         IBaseRepository<Author> Authors { get; }
         IBaseRepository<Booking> Bookings { get; }
         IBaseRepository<Customer> Customers { get; }
+        IBaseRepository<Genre> Genres { get; }
         IBaseRepository<Poster> Posters { get; }
         IBaseRepository<Ticket> Tickets { get; }
         IBaseRepository<TicketInfo> TicketInfos { get; }
         IBaseRepository<Transaction> Transactions { get; }
 
-        IPosterRepository PosterRepository { get; }
-        ITicketRepository TicketRepository { get; }
-        IBookingRepository BookingRepository { get; }
+        //IPosterRepository PosterRepository { get; }
+        //ITicketRepository TicketRepository { get; }
+        //IBookingRepository BookingRepository { get; }
 
         Task<int> CompleteAsync(CancellationToken ct = default);
         Task BeginTransactionAsync(CancellationToken ct = default);

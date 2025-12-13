@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoxOffice.DAL.Migrations
 {
     [DbContext(typeof(BoxOfficeDbContext))]
-    [Migration("20251212013330_initial")]
-    partial class initial
+    [Migration("20251213200038_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,13 +34,10 @@ namespace BoxOffice.DAL.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("author_name");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name");
 
                     b.ToTable("authors");
                 });
@@ -52,49 +49,24 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("BookingDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("booking_date")
-                        .HasDefaultValueSql("GETDATE()");
+                    b.Property<DateOnly>("BookedAt")
+                        .HasColumnType("date")
+                        .HasColumnName("booked_at");
 
                     b.Property<string>("BookingToken")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("booking_token");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("token");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("customer_id");
-
-                    b.Property<DateTime>("ExpiresAt")
-                        .HasColumnType("datetime2")
+                    b.Property<DateOnly>("ExpiresAt")
+                        .HasColumnType("date")
                         .HasColumnName("expires_at");
 
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("State")
                         .HasColumnType("int")
-                        .HasDefaultValue(0)
-                        .HasColumnName("status");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("total_amount");
+                        .HasColumnName("state");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookingDate");
-
-                    b.HasIndex("BookingToken")
-                        .IsUnique();
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("ExpiresAt");
-
-                    b.HasIndex("Status");
 
                     b.ToTable("bookings");
                 });
@@ -108,28 +80,39 @@ namespace BoxOffice.DAL.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("customer_email");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("email");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("customer_name");
-
-                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("customer_phone");
+                        .HasColumnName("name");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("phone_number");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("Name");
-
                     b.ToTable("customers");
+                });
+
+            modelBuilder.Entity("BoxOffice.DAL.Entities.Genre", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("genres");
                 });
 
             modelBuilder.Entity("BoxOffice.DAL.Entities.Poster", b =>
@@ -141,46 +124,34 @@ namespace BoxOffice.DAL.Migrations
 
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("author_id");
+                        .HasColumnName("performance_author");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)")
-                        .HasColumnName("poster_description");
-
-                    b.Property<int>("DurationMinutes")
-                        .HasColumnType("int")
-                        .HasColumnName("performance_duration");
-
-                    b.Property<string>("Genres")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("poster_genres");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)")
-                        .HasColumnName("poster_name");
-
-                    b.Property<DateOnly>("ReleaseDate")
+                    b.Property<DateOnly>("Date")
                         .HasColumnType("date")
                         .HasColumnName("release_date");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("performance_description");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int")
+                        .HasColumnName("performance_duration");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("performance_name");
+
                     b.Property<string>("Venue")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("performance_venue");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("Name");
-
-                    b.HasIndex("ReleaseDate");
 
                     b.ToTable("posters");
                 });
@@ -192,66 +163,42 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<DateTime?>("BookedUntil")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("booked_until");
-
                     b.Property<Guid?>("BookingId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("booking_id");
+                        .HasColumnName("booking");
 
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("customer_id");
-
-                    b.Property<Guid>("PosterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("poster_id");
+                        .HasColumnName("customer");
 
                     b.Property<string>("SeatNumber")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("seat_number");
 
-                    b.Property<DateTime?>("SoldDate")
-                        .HasColumnType("datetime2")
+                    b.Property<DateOnly?>("SoldDate")
+                        .HasColumnType("date")
                         .HasColumnName("sold_date");
-
-                    b.Property<int>("State")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0)
-                        .HasColumnName("ticket_state");
 
                     b.Property<Guid>("TicketInfoId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("ticket_info_id");
+                        .HasColumnName("ticket_info");
 
-                    b.Property<string>("UniqueBookingToken")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("unique_booking_token");
+                    b.Property<int>("TicketState")
+                        .HasColumnType("int")
+                        .HasColumnName("state");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookedUntil");
-
-                    b.HasIndex("BookingId");
+                    b.HasIndex("BookingId")
+                        .IsUnique()
+                        .HasFilter("[booking] IS NOT NULL");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("PosterId");
-
-                    b.HasIndex("SoldDate");
-
-                    b.HasIndex("State");
-
                     b.HasIndex("TicketInfoId");
 
-                    b.HasIndex("PosterId", "SeatNumber")
-                        .IsUnique();
-
-                    b.ToTable("ticket");
+                    b.ToTable("tickets");
                 });
 
             modelBuilder.Entity("BoxOffice.DAL.Entities.TicketInfo", b =>
@@ -261,32 +208,31 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<int>("AvailableTickets")
+                    b.Property<int>("AvailableCount")
                         .HasColumnType("int")
                         .HasColumnName("available_tickets");
 
-                    b.Property<int>("BookedTickets")
+                    b.Property<int>("BookedCount")
                         .HasColumnType("int")
                         .HasColumnName("booked_tickets");
 
                     b.Property<Guid>("PosterId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("poster_id");
+                        .HasColumnName("poster");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)")
-                        .HasColumnName("ticket_price");
+                        .HasColumnName("price");
 
-                    b.Property<int>("SoldTickets")
+                    b.Property<int>("SoldCount")
                         .HasColumnType("int")
                         .HasColumnName("sold_tickets");
 
                     b.Property<int>("TicketType")
                         .HasColumnType("int")
-                        .HasColumnName("ticket_type");
+                        .HasColumnName("type");
 
-                    b.Property<int>("TotalTickets")
+                    b.Property<int>("TotalCount")
                         .HasColumnType("int")
                         .HasColumnName("total_tickets");
 
@@ -294,9 +240,7 @@ namespace BoxOffice.DAL.Migrations
 
                     b.HasIndex("PosterId");
 
-                    b.HasIndex("TicketType");
-
-                    b.ToTable("tickets_info");
+                    b.ToTable("ticket_infos");
                 });
 
             modelBuilder.Entity("BoxOffice.DAL.Entities.Transaction", b =>
@@ -307,40 +251,28 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnName("id");
 
                     b.Property<decimal>("Amount")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("amount");
 
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("customer_id");
+                        .HasColumnName("customer");
 
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasDefaultValue("Card")
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date")
+                        .HasColumnName("date");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int")
                         .HasColumnName("payment_method");
-
-                    b.Property<string>("PaymentReference")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("payment_reference");
 
                     b.Property<Guid>("TicketId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("ticket_id");
-
-                    b.Property<DateTime>("TransactionDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("transaction_date")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasColumnName("ticket");
 
                     b.Property<int>("TransactionType")
                         .HasColumnType("int")
-                        .HasColumnName("transaction_type");
+                        .HasColumnName("type");
 
                     b.HasKey("Id");
 
@@ -348,22 +280,22 @@ namespace BoxOffice.DAL.Migrations
 
                     b.HasIndex("TicketId");
 
-                    b.HasIndex("TransactionDate");
-
-                    b.HasIndex("TransactionType");
-
                     b.ToTable("transactions");
                 });
 
-            modelBuilder.Entity("BoxOffice.DAL.Entities.Booking", b =>
+            modelBuilder.Entity("poster_genres", b =>
                 {
-                    b.HasOne("BoxOffice.DAL.Entities.Customer", "Customer")
-                        .WithMany("Bookings")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<Guid>("poster_id")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Navigation("Customer");
+                    b.Property<Guid>("genre_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("poster_id", "genre_id");
+
+                    b.HasIndex("genre_id");
+
+                    b.ToTable("poster_genres");
                 });
 
             modelBuilder.Entity("BoxOffice.DAL.Entities.Poster", b =>
@@ -380,20 +312,14 @@ namespace BoxOffice.DAL.Migrations
             modelBuilder.Entity("BoxOffice.DAL.Entities.Ticket", b =>
                 {
                     b.HasOne("BoxOffice.DAL.Entities.Booking", "Booking")
-                        .WithMany("Tickets")
-                        .HasForeignKey("BookingId")
+                        .WithOne("Ticket")
+                        .HasForeignKey("BoxOffice.DAL.Entities.Ticket", "BookingId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("BoxOffice.DAL.Entities.Customer", "Customer")
-                        .WithMany("PurchasedTickets")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("BoxOffice.DAL.Entities.Poster", "Poster")
                         .WithMany("Tickets")
-                        .HasForeignKey("PosterId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("BoxOffice.DAL.Entities.TicketInfo", "TicketInfo")
                         .WithMany("Tickets")
@@ -405,8 +331,6 @@ namespace BoxOffice.DAL.Migrations
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Poster");
-
                     b.Navigation("TicketInfo");
                 });
 
@@ -415,7 +339,7 @@ namespace BoxOffice.DAL.Migrations
                     b.HasOne("BoxOffice.DAL.Entities.Poster", "Poster")
                         .WithMany("TicketInfos")
                         .HasForeignKey("PosterId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Poster");
@@ -426,18 +350,33 @@ namespace BoxOffice.DAL.Migrations
                     b.HasOne("BoxOffice.DAL.Entities.Customer", "Customer")
                         .WithMany("Transactions")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BoxOffice.DAL.Entities.Ticket", "Ticket")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
 
                     b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("poster_genres", b =>
+                {
+                    b.HasOne("BoxOffice.DAL.Entities.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("genre_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BoxOffice.DAL.Entities.Poster", null)
+                        .WithMany()
+                        .HasForeignKey("poster_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BoxOffice.DAL.Entities.Author", b =>
@@ -447,14 +386,13 @@ namespace BoxOffice.DAL.Migrations
 
             modelBuilder.Entity("BoxOffice.DAL.Entities.Booking", b =>
                 {
-                    b.Navigation("Tickets");
+                    b.Navigation("Ticket")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BoxOffice.DAL.Entities.Customer", b =>
                 {
-                    b.Navigation("Bookings");
-
-                    b.Navigation("PurchasedTickets");
+                    b.Navigation("Tickets");
 
                     b.Navigation("Transactions");
                 });
@@ -462,8 +400,11 @@ namespace BoxOffice.DAL.Migrations
             modelBuilder.Entity("BoxOffice.DAL.Entities.Poster", b =>
                 {
                     b.Navigation("TicketInfos");
+                });
 
-                    b.Navigation("Tickets");
+            modelBuilder.Entity("BoxOffice.DAL.Entities.Ticket", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("BoxOffice.DAL.Entities.TicketInfo", b =>

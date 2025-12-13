@@ -13,5 +13,12 @@
   <ItemGroup>
 	<ProjectReference Include="..\BoxOffice.DAL\BoxOffice.DAL.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
 	
 </Project>

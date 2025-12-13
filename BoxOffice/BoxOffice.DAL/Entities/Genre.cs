@@ -2,8 +2,8 @@
 
 namespace BoxOffice.DAL.Entities
 {
-    [Table("authors")]
-    public class Author : BaseEntity
+    [Table("genres")]
+    public class Genre : BaseEntity
     {
         [Column("name")]
         public required string Name { get; set; }

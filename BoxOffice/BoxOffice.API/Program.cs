@@ -1,6 +1,6 @@
-using BoxOffice.BLL.Interfaces;
-using BoxOffice.BLL.Mapping;
-using BoxOffice.BLL.Services;
+//using BoxOffice.BLL.Interfaces;
+//using BoxOffice.BLL.Mapping;
+//using BoxOffice.BLL.Services;
 using BoxOffice.DAL.Context;
 using BoxOffice.DAL.Interfaces;
 using BoxOffice.DAL.Repository;
@@ -13,15 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BoxOfficeDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<IPosterService, PosterService>();
-builder.Services.AddScoped<ITicketService, TicketService>();
-builder.Services.AddScoped<IBookingService, BookingService>();
-builder.Services.AddScoped<IReportService, ReportService>();
-builder.Services.AddScoped<IAuthorService, AuthorService>();
+//builder.Services.AddScoped<IPosterService, PosterService>();
+//builder.Services.AddScoped<ITicketService, TicketService>();
+//builder.Services.AddScoped<IBookingService, BookingService>();
+//builder.Services.AddScoped<IReportService, ReportService>();
+//builder.Services.AddScoped<IAuthorService, AuthorService>();
 
-builder.Services.AddAutoMapper(typeof(PosterProfile).Assembly);
+//builder.Services.AddAutoMapper(typeof(PosterProfile).Assembly);
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

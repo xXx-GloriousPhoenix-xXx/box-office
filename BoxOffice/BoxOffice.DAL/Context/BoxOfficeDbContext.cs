@@ -6,13 +6,15 @@ namespace BoxOffice.DAL.Context
 {
     public class BoxOfficeDbContext(DbContextOptions<BoxOfficeDbContext> options) : DbContext(options)
     {
-        DbSet<Author> Authors { get; set; }
-        DbSet<Booking> Bookings { get; set; }
-        DbSet<Customer> Customers { get; set; }
-        DbSet<Poster> Posters { get; set; }
-        DbSet<Ticket> Tickets { get; set; }
-        DbSet<TicketInfo> TicketInfos { get; set; }
-        DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Poster> Posters { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<TicketInfo> TicketInfos { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -21,205 +23,96 @@ namespace BoxOffice.DAL.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Author>(entity =>
+            // ===== Author — Poster (1:N) =====
+            modelBuilder.Entity<Poster>()
+                .HasOne(p => p.Author)
+                .WithMany(a => a.Posters)
+                .HasForeignKey(p => p.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
+            // Не можна видалити автора, якщо у нього є афіши
+
+            // ===== Poster — Genre (M:N) =====
+            modelBuilder.Entity<Poster>()
+                .HasMany(p => p.Genres)
+                .WithMany(g => g.Posters)
+                .UsingEntity<Dictionary<string, object>>(
+                    "poster_genres",
+                    j => j
+                        .HasOne<Genre>()
+                        .WithMany()
+                        .HasForeignKey("genre_id")
+                        .OnDelete(DeleteBehavior.Cascade),
+                    j => j
+                        .HasOne<Poster>()
+                        .WithMany()
+                        .HasForeignKey("poster_id")
+                        .OnDelete(DeleteBehavior.Cascade),
+                    j =>
+                    {
+                        j.HasKey("poster_id", "genre_id");
+                    });
+            // Якщо видаляється афіша - видаляються зв'язки з жанром
+            // Якщо видаляється жанр - видаляються зв'язки з афішами
+
+            modelBuilder.Entity<TicketInfo>(e =>
             {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                // ===== Poster — TicketInfo (1:N) =====
+                e.HasOne(ti => ti.Poster)
+                .WithMany(p => p.TicketInfos)
+                .HasForeignKey(ti => ti.PosterId)
+                .OnDelete(DeleteBehavior.Cascade);
+                // Якщо видаляється афіша - видаляються зв'язані з нею види квитків
 
-                entity.HasIndex(e => e.Name);
-            });
-
-            modelBuilder.Entity<Customer>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.HasIndex(e => e.Email)
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Name);
-            });
-
-            modelBuilder.Entity<Poster>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(300);
-
-                entity.Property(e => e.Venue)
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.Description)
-                    .HasMaxLength(2000);
-
-                entity.Property(e => e.ReleaseDate)
+                e.Property(e => e.Price)
+                    .HasPrecision(7, 2)
                     .IsRequired();
 
-                entity.HasOne(e => e.Author)
-                    .WithMany(a => a.Posters)
-                    .HasForeignKey(e => e.AuthorId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.Property(e => e.Genres)
-                    .HasConversion(
-                        v => string.Join(',', v.Select(g => g.ToString())),
-                        v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                              .Select(g => Enum.Parse<PosterGenre>(g))
-                              .ToList());
-
-                entity.HasIndex(e => e.Name);
-                entity.HasIndex(e => e.ReleaseDate);
-                entity.HasIndex(e => e.AuthorId);
+                e.Property(e => e.TicketType)
+                    .HasConversion<string>()
+                    .HasMaxLength(16);
             });
 
-            modelBuilder.Entity<TicketInfo>(entity =>
-            {
-                entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.Price)
-                    .HasPrecision(18, 2)
-                    .IsRequired();
 
-                entity.Property(e => e.TicketType)
-                    .IsRequired();
+            // ===== TicketInfo — Ticket (1:N) =====
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.TicketInfo)
+                .WithMany(ti => ti.Tickets)
+                .HasForeignKey(t => t.TicketInfoId)
+                .OnDelete(DeleteBehavior.Restrict);
+            // Не можна видалити тип квитку, якщо у нього є афіша
 
-                entity.HasOne(e => e.Poster)
-                    .WithMany(p => p.TicketInfos)
-                    .HasForeignKey(e => e.PosterId)
-                    .OnDelete(DeleteBehavior.Restrict);
+            // ===== Customer — Ticket (1:N, optional) =====
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.Customer)
+                .WithMany(c => c.Tickets)
+                .HasForeignKey(t => t.CustomerId)
+                .OnDelete(DeleteBehavior.SetNull);
+            // Якщо видалити клієнта - CustomerId записується як null
 
-                entity.HasIndex(e => e.PosterId);
-                entity.HasIndex(e => e.TicketType);
-            });
+            // ===== Booking — Ticket (1:1) =====
+            modelBuilder.Entity<Booking>()
+                .HasOne(b => b.Ticket)
+                .WithOne(t => t.Booking)
+                .HasForeignKey<Ticket>(t => t.BookingId)
+                .OnDelete(DeleteBehavior.SetNull);
+            // Якщо бронювання - BookingId записується як null
 
-            modelBuilder.Entity<Ticket>(entity =>
-            {
-                entity.HasKey(e => e.Id);
+            // ===== Ticket — Transaction (1:N) =====
+            modelBuilder.Entity<Transaction>()
+                .HasOne(tr => tr.Ticket)
+                .WithMany(t => t.Transactions)
+                .HasForeignKey(tr => tr.TicketId)
+                .OnDelete(DeleteBehavior.Cascade);
+            // Якщо видалити білет - транзації видаляються
 
-                entity.Property(e => e.SeatNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.State)
-                    .IsRequired()
-                    .HasDefaultValue(TicketState.Available);
-
-                entity.HasOne(e => e.TicketInfo)
-                    .WithMany(ti => ti.Tickets)
-                    .HasForeignKey(e => e.TicketInfoId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne(e => e.Poster)
-                    .WithMany(p => p.Tickets)
-                    .HasForeignKey(e => e.PosterId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne(e => e.Customer)
-                    .WithMany(c => c.PurchasedTickets)
-                    .HasForeignKey(e => e.CustomerId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne(e => e.Booking)
-                    .WithMany(b => b.Tickets)
-                    .HasForeignKey(e => e.BookingId)
-                    .OnDelete(DeleteBehavior.SetNull);
-
-                entity.HasIndex(e => new { e.PosterId, e.SeatNumber })
-                    .IsUnique();
-
-                entity.HasIndex(e => e.PosterId);
-                entity.HasIndex(e => e.TicketInfoId);
-                entity.HasIndex(e => e.CustomerId);
-                entity.HasIndex(e => e.BookingId);
-                entity.HasIndex(e => e.State);
-                entity.HasIndex(e => e.BookedUntil);
-                entity.HasIndex(e => e.SoldDate);
-            });
-
-            modelBuilder.Entity<Booking>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.BookingToken)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.TotalAmount)
-                    .HasPrecision(18, 2)
-                    .IsRequired();
-
-                entity.Property(e => e.BookingDate)
-                    .IsRequired()
-                    .HasDefaultValueSql("GETDATE()");
-
-                entity.Property(e => e.ExpiresAt)
-                    .IsRequired();
-
-                entity.Property(e => e.Status)
-                    .IsRequired()
-                    .HasDefaultValue(BookingStatus.Active);
-
-                entity.HasOne(e => e.Customer)
-                    .WithMany(c => c.Bookings)
-                    .HasForeignKey(e => e.CustomerId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasIndex(e => e.BookingToken)
-                    .IsUnique();
-
-                entity.HasIndex(e => e.CustomerId);
-                entity.HasIndex(e => e.Status);
-                entity.HasIndex(e => e.ExpiresAt);
-                entity.HasIndex(e => e.BookingDate);
-            });
-
-            modelBuilder.Entity<Transaction>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Amount)
-                    .HasPrecision(18, 2)
-                    .IsRequired();
-
-                entity.Property(e => e.TransactionDate)
-                    .IsRequired()
-                    .HasDefaultValueSql("GETDATE()");
-
-                entity.Property(e => e.TransactionType)
-                    .IsRequired();
-
-                entity.Property(e => e.PaymentMethod)
-                    .HasMaxLength(50)
-                    .HasDefaultValue("Card");
-
-                entity.Property(e => e.PaymentReference)
-                    .HasMaxLength(200);
-
-                entity.HasOne(e => e.Ticket)
-                    .WithMany()
-                    .HasForeignKey(e => e.TicketId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne(e => e.Customer)
-                    .WithMany(c => c.Transactions)
-                    .HasForeignKey(e => e.CustomerId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasIndex(e => e.CustomerId);
-                entity.HasIndex(e => e.TicketId);
-                entity.HasIndex(e => e.TransactionType);
-                entity.HasIndex(e => e.TransactionDate);
-            });
+            // ===== Customer — Transaction (1:N) =====
+            modelBuilder.Entity<Transaction>()
+                .HasOne(tr => tr.Customer)
+                .WithMany(c => c.Transactions)
+                .HasForeignKey(tr => tr.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade);
+            // Якщо видалити клієнта - транзації видаляються
         }
     }
 }

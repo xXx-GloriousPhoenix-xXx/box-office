@@ -6,31 +6,28 @@ namespace BoxOffice.DAL.Entities
     [Table("transactions")]
     public class Transaction : BaseEntity
     {
-        [Column("ticket_id")]
-        public Guid TicketId { get; set; }
-
-        [Column("customer_id")]
-        public Guid CustomerId { get; set; }
-
-        [Column("transaction_date")]
-        public DateTime TransactionDate { get; set; } = DateTime.UtcNow;
-
-        [Column("transaction_type")]
-        public TransactionType TransactionType { get; set; }
-
         [Column("amount")]
         public decimal Amount { get; set; }
 
+        [Column("date")]
+        public DateOnly Date { get; set; }
+
         [Column("payment_method")]
-        public string PaymentMethod { get; set; } = "Card";
+        public PaymentMethod PaymentMethod { get; set; }
 
-        [Column("payment_reference")]
-        public string? PaymentReference { get; set; }
+        [Column("type")]
+        public TransactionType TransactionType { get; set; }
 
-        [ForeignKey(nameof(TicketId))]
-        public virtual Ticket? Ticket { get; set; }
+        [Column("customer")]
+        public Guid CustomerId { get; set; }
 
-        [ForeignKey(nameof(CustomerId))]
-        public virtual Customer? Customer { get; set; }
+        [Column("ticket")]
+        public Guid TicketId { get; set; }
+
+        [Column(nameof(CustomerId))]
+        public required Customer Customer { get; set; }
+
+        [Column(nameof(TicketId))]
+        public required Ticket Ticket { get; set; }
     }
 }

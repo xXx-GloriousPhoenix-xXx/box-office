@@ -8,7 +8,8 @@ namespace BoxOffice.DAL.Repository
 {
     public class BaseRepository<T>(BoxOfficeDbContext context) : IBaseRepository<T> where T : BaseEntity
     {
-        protected readonly BoxOfficeDbContext _dbContext = context ?? throw new ArgumentNullException(nameof(context));
+        protected readonly BoxOfficeDbContext _dbContext = context
+            ?? throw new ArgumentNullException(nameof(context));
         protected readonly DbSet<T> _dbSet = context.Set<T>();
 
         public IQueryable<T> AsQueryable() => _dbSet.AsQueryable();

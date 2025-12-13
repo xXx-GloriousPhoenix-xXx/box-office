@@ -3,47 +3,36 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BoxOffice.DAL.Entities
 {
-    [Table("ticket")]
+    [Table("tickets")]
     public class Ticket : BaseEntity
     {
-        [Column("ticket_info_id")]
+        [Column("ticket_info")]
         public Guid TicketInfoId { get; set; }
 
-        [Column("poster_id")]
-        public Guid PosterId { get; set; }
-
-        // A10, B15
         [Column("seat_number")]
-        public required string SeatNumber { get; set; } 
+        public required string SeatNumber { get; set; }
 
-        [Column("ticket_state")]
-        public TicketState State { get; set; } = TicketState.Available;
+        [Column("customer")]
+        public Guid? CustomerId { get; set; }   
 
-        [Column("customer_id")]
-        public Guid? CustomerId { get; set; }
+        [Column("state")]
+        public TicketState TicketState { get; set; }
 
-        [Column("booking_id")]
+        [Column("booking")]
         public Guid? BookingId { get; set; }
 
-        [Column("booked_until")]
-        public DateTime? BookedUntil { get; set; }
-
         [Column("sold_date")]
-        public DateTime? SoldDate { get; set; }
+        public DateOnly? SoldDate { get; set; }
 
-        [Column("unique_booking_token")]
-        public string? UniqueBookingToken { get; set; }
+        [Column(nameof(BookingId))]
+        public Booking? Booking { get; set; }
 
-        [ForeignKey(nameof(TicketInfoId))]
-        public virtual TicketInfo? TicketInfo { get; set; }
+        [Column(nameof(TicketInfoId))]
+        public required TicketInfo TicketInfo { get; set; }
 
-        [ForeignKey(nameof(PosterId))]
-        public virtual Poster? Poster { get; set; }
+        [Column(nameof(CustomerId))]
+        public Customer? Customer { get; set; }
 
-        [ForeignKey(nameof(CustomerId))]
-        public virtual Customer? Customer { get; set; }
-
-        [ForeignKey(nameof(BookingId))]
-        public virtual Booking? Booking { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; } = [];
     }
 }
