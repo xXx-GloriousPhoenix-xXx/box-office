@@ -5,6 +5,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|solutionrelative:boxoffice.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.api\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|solutionrelative:boxoffice.api\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|solutionrelative:boxoffice.api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dal\\entities\\poster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dal\\entities\\poster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,10 +40,46 @@
               "RelativeDocumentMoniker": "BoxOffice.API\\Program.cs",
               "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Program.cs",
               "RelativeToolTip": "BoxOffice.API\\Program.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAEwBYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAABsAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T19:18:56.357Z",
+              "WhenOpened": "2025-12-14T02:04:45.746Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthorController.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\AuthorController.cs",
+              "RelativeDocumentMoniker": "BoxOffice.API\\Controllers\\AuthorController.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\AuthorController.cs",
+              "RelativeToolTip": "BoxOffice.API\\Controllers\\AuthorController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAgwC4AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T02:00:59.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomersController.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\CustomersController.cs",
+              "RelativeDocumentMoniker": "BoxOffice.API\\Controllers\\CustomersController.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\CustomersController.cs",
+              "RelativeToolTip": "BoxOffice.API\\Controllers\\CustomersController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAA7wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T02:00:47.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Poster.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Entities\\Poster.cs",
+              "RelativeDocumentMoniker": "BoxOffice.DAL\\Entities\\Poster.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Entities\\Poster.cs",
+              "RelativeToolTip": "BoxOffice.DAL\\Entities\\Poster.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBQAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T01:58:04.98Z"
             }
           ]
         }

@@ -31,7 +31,7 @@ namespace BoxOffice.DAL.Migrations
                     booked_at = table.Column<DateOnly>(type: "date", nullable: false),
                     expires_at = table.Column<DateOnly>(type: "date", nullable: false),
                     token = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    state = table.Column<int>(type: "int", nullable: false)
+                    state = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,12 +117,12 @@ namespace BoxOffice.DAL.Migrations
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     poster = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    price = table.Column<decimal>(type: "decimal(5,2)", precision: 5, scale: 2, nullable: false),
                     total_tickets = table.Column<int>(type: "int", nullable: false),
                     available_tickets = table.Column<int>(type: "int", nullable: false),
                     sold_tickets = table.Column<int>(type: "int", nullable: false),
                     booked_tickets = table.Column<int>(type: "int", nullable: false),
-                    type = table.Column<int>(type: "int", nullable: false)
+                    type = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -143,7 +143,7 @@ namespace BoxOffice.DAL.Migrations
                     ticket_info = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     seat_number = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     customer = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    state = table.Column<int>(type: "int", nullable: false),
+                    state = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
                     booking = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     sold_date = table.Column<DateOnly>(type: "date", nullable: true)
                 },
@@ -175,10 +175,10 @@ namespace BoxOffice.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    amount = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
                     date = table.Column<DateOnly>(type: "date", nullable: false),
-                    payment_method = table.Column<int>(type: "int", nullable: false),
-                    type = table.Column<int>(type: "int", nullable: false),
+                    payment_method = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    type = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
                     customer = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ticket = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

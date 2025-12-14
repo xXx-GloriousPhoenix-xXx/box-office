@@ -1,6 +1,8 @@
 //using BoxOffice.BLL.Interfaces;
 //using BoxOffice.BLL.Mapping;
 //using BoxOffice.BLL.Services;
+using BoxOffice.BLL.Interfaces;
+using BoxOffice.BLL.Services;
 using BoxOffice.DAL.Context;
 using BoxOffice.DAL.Interfaces;
 using BoxOffice.DAL.Repository;
@@ -22,6 +24,9 @@ builder.Services.AddDbContext<BoxOfficeDbContext>(options =>
 //builder.Services.AddScoped<IAuthorService, AuthorService>();
 
 //builder.Services.AddAutoMapper(typeof(PosterProfile).Assembly);
+
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

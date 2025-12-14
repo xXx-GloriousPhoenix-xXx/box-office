@@ -59,8 +59,10 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnType("date")
                         .HasColumnName("expires_at");
 
-                    b.Property<int>("State")
-                        .HasColumnType("int")
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("state");
 
                     b.HasKey("Id");
@@ -181,8 +183,10 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ticket_info");
 
-                    b.Property<int>("TicketState")
-                        .HasColumnType("int")
+                    b.Property<string>("TicketState")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("state");
 
                     b.HasKey("Id");
@@ -218,15 +222,18 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnName("poster");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)")
                         .HasColumnName("price");
 
                     b.Property<int>("SoldCount")
                         .HasColumnType("int")
                         .HasColumnName("sold_tickets");
 
-                    b.Property<int>("TicketType")
-                        .HasColumnType("int")
+                    b.Property<string>("TicketType")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("type");
 
                     b.Property<int>("TotalCount")
@@ -248,7 +255,8 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnName("id");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)")
                         .HasColumnName("amount");
 
                     b.Property<Guid>("CustomerId")
@@ -259,16 +267,20 @@ namespace BoxOffice.DAL.Migrations
                         .HasColumnType("date")
                         .HasColumnName("date");
 
-                    b.Property<int>("PaymentMethod")
-                        .HasColumnType("int")
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("payment_method");
 
                     b.Property<Guid>("TicketId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ticket");
 
-                    b.Property<int>("TransactionType")
-                        .HasColumnType("int")
+                    b.Property<string>("TransactionType")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("type");
 
                     b.HasKey("Id");
