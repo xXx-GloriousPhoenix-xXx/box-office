@@ -1,11 +1,9 @@
-//using BoxOffice.BLL.Interfaces;
-//using BoxOffice.BLL.Mapping;
-//using BoxOffice.BLL.Services;
-using BoxOffice.BLL.Interfaces;
-using BoxOffice.BLL.Services;
+using BoxOffice.BLL.Mapping;
+using BoxOffice.BLL.Services.Implementations;
+using BoxOffice.BLL.Services.Interfaces;
 using BoxOffice.DAL.Context;
-using BoxOffice.DAL.Interfaces;
-using BoxOffice.DAL.Repository;
+using BoxOffice.DAL.Repositories.Implementations;
+using BoxOffice.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,24 +13,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BoxOfficeDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddAutoMapper(typeof(AuthorProfile).Assembly);
 
-//builder.Services.AddScoped<IPosterService, PosterService>();
-//builder.Services.AddScoped<ITicketService, TicketService>();
-//builder.Services.AddScoped<IBookingService, BookingService>();
-//builder.Services.AddScoped<IReportService, ReportService>();
-//builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-//builder.Services.AddAutoMapper(typeof(PosterProfile).Assembly);
-
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services
+    .AddScoped<ICustomerService, CustomerService>()
+    .AddScoped<IAuthorService, AuthorService>()
+    .AddScoped<IGenreService, GenreService>()
+    .AddScoped<IPosterService, PosterService>()
+    .AddScoped<ITicketInfoService, TicketInfoService>()
+    .AddScoped<ITicketService, TicketService>()
+    .AddScoped<IBookingService, BookingService>()
+    .AddScoped<ITransactionService, TransactionService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(
-            JsonNamingPolicy.CamelCase,
+            JsonNamingPolicy.KebabCaseLower,
             allowIntegerValues: false));
     });
 

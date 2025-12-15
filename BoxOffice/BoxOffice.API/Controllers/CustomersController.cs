@@ -1,5 +1,6 @@
-﻿using BoxOffice.BLL.DTOs.CustomerDtos;
-using BoxOffice.BLL.Interfaces;
+﻿using BoxOffice.BLL.DTOs.AdditionalDtos;
+using BoxOffice.BLL.DTOs.CustomerDtos;
+using BoxOffice.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoxOffice.API.Controllers
@@ -16,7 +17,7 @@ namespace BoxOffice.API.Controllers
         }
 
         [HttpGet("{page:int}/{itemsPerPage:int}")]
-        public async Task<ActionResult<IEnumerable<GetCustomerDto>>> GetAllAsync(int page, int itemsPerPage)
+        public async Task<ActionResult<PagedResponse<GetCustomerDto>>> GetAllAsync(int page, int itemsPerPage)
         {
             var result = await service.GetAllAsync(page, itemsPerPage);
             return Ok(result);
@@ -29,7 +30,7 @@ namespace BoxOffice.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id:guid}")]
+        [HttpPatch("{id:guid}")]
         public async Task<ActionResult<GetCustomerDto>> UpdateAsync(Guid id, [FromForm] UpdateCustomerDto dto)
         {
             var result = await service.UpdateAsync(id, dto);

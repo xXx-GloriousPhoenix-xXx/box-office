@@ -1,4 +1,4 @@
-﻿using BoxOffice.DAL.Enums;
+﻿using BoxOffice.DAL.Models.Enums;
 
 namespace BoxOffice.BLL.DTOs.AdditionalDtos
 {

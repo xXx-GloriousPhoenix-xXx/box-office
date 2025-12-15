@@ -1,5 +1,5 @@
 ﻿using BoxOffice.DAL.Configuration;
-using BoxOffice.DAL.Entities;
+using BoxOffice.DAL.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoxOffice.DAL.Context
