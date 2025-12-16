@@ -30,6 +30,9 @@ namespace BoxOffice.BLL.Services.Implementations
         [LoggerMessage(LogLevel.Information, "Poster deleted: {Name} (ID: {Id})")]
         partial void LogPosterDeleted(string name, Guid id);
 
+        [LoggerMessage(LogLevel.Warning, "Poster force deleted: {Name} (ID: {Id})")]
+        partial void LogPosterForceDeleted(string name, Guid id);
+
         public async Task<GetPosterWithTicketInfosDto> AddAsync(CreatePosterDto createDto, CancellationToken ct = default)
         {
             // Validate Author exists
@@ -480,31 +483,49 @@ namespace BoxOffice.BLL.Services.Implementations
                 .Where(t => t.TicketState == state)
                 .ToList();
 
-            // Map to DTO
-            var posterDto = _mapper.Map<GetPosterWithTicketsDto>(poster);
-            posterDto.Author = poster.Author?.Name ?? string.Empty;
-            posterDto.Genres = poster.Genres.Select(g => g.Name).ToList();
-            posterDto.Tickets = new PagedResponse<GetTicketAdditionDto>
+            // Создаем базовый DTO через AutoMapper
+            var basePosterDto = _mapper.Map<GetPosterDto>(poster);
+
+            // Создаем GetPosterWithTicketsDto на основе базового
+            var posterDto = new GetPosterWithTicketsDto
             {
-                Items = _mapper.Map<List<GetTicketAdditionDto>>(allTickets),
-                CurrentPage = 1,
-                PageSize = allTickets.Count,
-                TotalCount = allTickets.Count,
-                TotalPages = 1
+                Id = basePosterDto.Id,
+                Name = basePosterDto.Name,
+                Author = basePosterDto.Author,
+                Description = basePosterDto.Description,
+                Venue = basePosterDto.Venue,
+                Date = basePosterDto.Date,
+                Duration = basePosterDto.Duration,
+                Genres = basePosterDto.Genres,
+                Tickets = new PagedResponse<GetTicketAdditionDto>
+                {
+                    Items = new List<GetTicketAdditionDto>(),
+                    CurrentPage = 1,
+                    PageSize = allTickets.Count,
+                    TotalCount = allTickets.Count,
+                    TotalPages = 1
+                }
             };
 
-            // Add price and type to ticket DTOs
-            foreach (var ticketDto in posterDto.Tickets.Items)
+            // Добавляем билеты
+            foreach (var ticket in allTickets)
             {
-                var ticket = allTickets.First(t => t.Id == ticketDto.Id);
                 var ticketInfo = poster.TicketInfos.First(ti => ti.Id == ticket.TicketInfoId);
-                ticketDto.Price = ticketInfo.Price;
-                ticketDto.Type = ticketInfo.TicketType;
+
+                var ticketDto = new GetTicketAdditionDto
+                {
+                    Id = ticket.Id,
+                    SeatNumber = ticket.SeatNumber,
+                    Price = ticketInfo.Price,
+                    Type = ticketInfo.TicketType,
+                    State = ticket.TicketState
+                };
+
+                posterDto.Tickets.Items.Add(ticketDto);
             }
 
             return posterDto;
         }
-
         public async Task<GetPosterStatsDto> GetPosterStatisticsAsync(Guid id, CancellationToken ct = default)
         {
             var poster = await _unitOfWork.Posters
@@ -652,6 +673,82 @@ namespace BoxOffice.BLL.Services.Implementations
             result.Genres = poster.Genres.Select(g => g.Name).ToList();
 
             return result;
+        }
+
+        public async Task ForceDeleteAsync(Guid id, CancellationToken ct = default)
+        {
+            var poster = await _unitOfWork.Posters
+        .GetByIdAsync(id, ct,
+            includes: p => p.TicketInfos!);
+
+            if (poster is null)
+            {
+                throw new NotFoundException($"Poster with id {id} not found");
+            }
+
+            await _unitOfWork.BeginTransactionAsync(ct);
+            try
+            {
+                // Если есть TicketInfos, удаляем каскадно все связанные сущности
+                if (poster.TicketInfos.Any())
+                {
+                    foreach (var ticketInfo in poster.TicketInfos)
+                    {
+                        // Загружаем полную информацию о TicketInfo с билетами
+                        var fullTicketInfo = await _unitOfWork.TicketInfos
+                            .GetByIdAsync(ticketInfo.Id, ct,
+                                includes: ti => ti.Tickets!);
+
+                        if (fullTicketInfo != null && fullTicketInfo.Tickets.Any())
+                        {
+                            foreach (var ticket in fullTicketInfo.Tickets)
+                            {
+                                // Загружаем транзакции для билета
+                                var ticketWithTransactions = await _unitOfWork.Tickets
+                                    .GetByIdAsync(ticket.Id, ct,
+                                        t => t.Transactions!,
+                                        t => t.Booking!);
+
+                                // Удаляем связанные сущности билета
+                                if (ticketWithTransactions != null)
+                                {
+                                    // Удаляем транзакции
+                                    if (ticketWithTransactions.Transactions.Any())
+                                    {
+                                        _unitOfWork.Transactions.DeleteRange(
+                                            ticketWithTransactions.Transactions.ToList());
+                                    }
+
+                                    // Удаляем бронирование если есть
+                                    if (ticketWithTransactions.Booking != null)
+                                    {
+                                        _unitOfWork.Bookings.Delete(ticketWithTransactions.Booking);
+                                    }
+
+                                    // Удаляем сам билет
+                                    _unitOfWork.Tickets.Delete(ticketWithTransactions);
+                                }
+                            }
+                        }
+
+                        // Удаляем TicketInfo
+                        _unitOfWork.TicketInfos.Delete(fullTicketInfo ?? ticketInfo);
+                    }
+                }
+
+                // Удаляем сам постер
+                _unitOfWork.Posters.Delete(poster);
+
+                await _unitOfWork.CompleteAsync(ct);
+                await _unitOfWork.CommitTransactionAsync(ct);
+
+                LogPosterForceDeleted(poster.Name, poster.Id);
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync(ct);
+                throw;
+            }
         }
     }
 }

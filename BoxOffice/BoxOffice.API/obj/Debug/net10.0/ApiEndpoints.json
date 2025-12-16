@@ -759,6 +759,22 @@
   },
   {
     "ContainingType": "BoxOffice.API.Controllers.PostersController",
+    "Method": "ForceDeleteAsync",
+    "RelativePath": "api/posters/{id}/force",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BoxOffice.API.Controllers.PostersController",
     "Method": "GetPosterStatisticsAsync",
     "RelativePath": "api/posters/{id}/stats",
     "HttpMethod": "GET",

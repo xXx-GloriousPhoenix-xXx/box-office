@@ -11,6 +11,7 @@ namespace BoxOffice.BLL.Services.Interfaces
         Task<GetPosterWithTicketInfosDto> AddAsync(CreatePosterDto createDto, CancellationToken ct = default);
         Task<GetPosterDto> UpdateAsync(Guid id, UpdatePosterDto updateDto, CancellationToken ct = default);
         Task DeleteAsync(Guid id, CancellationToken ct = default);
+        Task ForceDeleteAsync(Guid id, CancellationToken ct = default);
         Task<GetPosterWithTicketsDto> GetPosterTicketsAsync(Guid id, TicketState state, CancellationToken ct = default);
         Task<GetPosterStatsDto> GetPosterStatisticsAsync(Guid id, CancellationToken ct = default);
     }

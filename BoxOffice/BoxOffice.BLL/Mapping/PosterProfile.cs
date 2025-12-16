@@ -19,7 +19,12 @@ namespace BoxOffice.BLL.Mapping
                 .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.Genres.Select(g => g.Name)));
 
             CreateMap<Poster, GetPosterWithTicketInfosDto>()
-                .IncludeBase<Poster, GetPosterDto>();
+            .IncludeBase<Poster, GetPosterDto>()
+            .ForMember(dest => dest.TicketInfos, opt => opt.Ignore());
+
+            CreateMap<Poster, GetPosterWithTicketsDto>()
+                .IncludeBase<Poster, GetPosterDto>()
+                .ForMember(dest => dest.Tickets, opt => opt.Ignore());
 
             CreateMap<TicketInfo, GetTicketInfoAdditionDto>();
 
