@@ -3,36 +3,20 @@
   "WorkspaceRootPath": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dal\\context\\boxofficedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dal\\context\\boxofficedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\mapping\\transactionprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\mapping\\transactionprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\implementations\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\implementations\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\interfaces\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\interfaces\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\dtos\\transactiondtos\\gettransactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\dtos\\transactiondtos\\gettransactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dal\\models\\entities\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dal\\models\\entities\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dal\\models\\entities\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dal\\models\\entities\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dal\\models\\entities\\ticketinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dal\\models\\entities\\ticketinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dal\\models\\entities\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dal\\models\\entities\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\dtos\\transactiondtos\\createtransactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\dtos\\transactiondtos\\createtransactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.api\\controllers\\transactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|solutionrelative:boxoffice.api\\controllers\\transactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 353,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,85 +34,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Ticket.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Models\\Entities\\Ticket.cs",
-              "RelativeDocumentMoniker": "BoxOffice.DAL\\Models\\Entities\\Ticket.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Models\\Entities\\Ticket.cs",
-              "RelativeToolTip": "BoxOffice.DAL\\Models\\Entities\\Ticket.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAQwBYAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "BoxOfficeDbContext.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Context\\BoxOfficeDbContext.cs",
+              "RelativeDocumentMoniker": "BoxOffice.DAL\\Context\\BoxOfficeDbContext.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Context\\BoxOfficeDbContext.cs",
+              "RelativeToolTip": "BoxOffice.DAL\\Context\\BoxOfficeDbContext.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAcwMIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T17:05:00.814Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Transaction.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Models\\Entities\\Transaction.cs",
-              "RelativeDocumentMoniker": "BoxOffice.DAL\\Models\\Entities\\Transaction.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Models\\Entities\\Transaction.cs",
-              "RelativeToolTip": "BoxOffice.DAL\\Models\\Entities\\Transaction.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T17:04:38.837Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TicketInfo.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Models\\Entities\\TicketInfo.cs",
-              "RelativeDocumentMoniker": "BoxOffice.DAL\\Models\\Entities\\TicketInfo.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Models\\Entities\\TicketInfo.cs",
-              "RelativeToolTip": "BoxOffice.DAL\\Models\\Entities\\TicketInfo.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAYwCMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T17:04:35.092Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Customer.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Models\\Entities\\Customer.cs",
-              "RelativeDocumentMoniker": "BoxOffice.DAL\\Models\\Entities\\Customer.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Models\\Entities\\Customer.cs",
-              "RelativeToolTip": "BoxOffice.DAL\\Models\\Entities\\Customer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T17:04:30.876Z",
+              "WhenOpened": "2025-12-16T17:51:18.332Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GetTransactionDto.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\DTOs\\TransactionDtos\\GetTransactionDto.cs",
-              "RelativeDocumentMoniker": "BoxOffice.BLL\\DTOs\\TransactionDtos\\GetTransactionDto.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\DTOs\\TransactionDtos\\GetTransactionDto.cs",
-              "RelativeToolTip": "BoxOffice.BLL\\DTOs\\TransactionDtos\\GetTransactionDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Title": "TransactionProfile.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Mapping\\TransactionProfile.cs",
+              "RelativeDocumentMoniker": "BoxOffice.BLL\\Mapping\\TransactionProfile.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Mapping\\TransactionProfile.cs",
+              "RelativeToolTip": "BoxOffice.BLL\\Mapping\\TransactionProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T17:02:07.553Z",
+              "WhenOpened": "2025-12-16T17:48:18.378Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CreateTransactionDto.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\DTOs\\TransactionDtos\\CreateTransactionDto.cs",
-              "RelativeDocumentMoniker": "BoxOffice.BLL\\DTOs\\TransactionDtos\\CreateTransactionDto.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\DTOs\\TransactionDtos\\CreateTransactionDto.cs",
-              "RelativeToolTip": "BoxOffice.BLL\\DTOs\\TransactionDtos\\CreateTransactionDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "TransactionService.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\TransactionService.cs",
+              "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Implementations\\TransactionService.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\TransactionService.cs",
+              "RelativeToolTip": "BoxOffice.BLL\\Services\\Implementations\\TransactionService.cs",
+              "ViewState": "AgIAACYBAAAAAAAAAAAqwDIBAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T17:02:02.743Z",
+              "WhenOpened": "2025-12-16T17:36:24.297Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ITransactionService.cs",
               "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Interfaces\\ITransactionService.cs",
               "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Interfaces\\ITransactionService.cs",
@@ -137,19 +82,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T16:58:46.168Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "TransactionsController.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\TransactionsController.cs",
-              "RelativeDocumentMoniker": "BoxOffice.API\\Controllers\\TransactionsController.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\TransactionsController.cs",
-              "RelativeToolTip": "BoxOffice.API\\Controllers\\TransactionsController.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAwwDEAAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T16:52:45.651Z",
               "EditorCaption": ""
             }
           ]

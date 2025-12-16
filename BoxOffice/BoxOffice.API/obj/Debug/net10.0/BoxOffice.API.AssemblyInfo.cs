@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BoxOffice.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c13e7dc99ff4452dc70c4dfbc5b4e83991a7785")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae5d15b04d432e9e185f38651b1c77b88548ce8")]
 [assembly: System.Reflection.AssemblyProductAttribute("BoxOffice.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BoxOffice.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
