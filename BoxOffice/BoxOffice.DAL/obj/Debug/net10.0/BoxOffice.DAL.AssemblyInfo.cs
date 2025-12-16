@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BoxOffice.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c5a15275ac8f2817d729b5035edfbcc20c8784e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c13e7dc99ff4452dc70c4dfbc5b4e83991a7785")]
 [assembly: System.Reflection.AssemblyProductAttribute("BoxOffice.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BoxOffice.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

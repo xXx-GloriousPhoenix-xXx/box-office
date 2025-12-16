@@ -290,10 +290,10 @@ namespace BoxOffice.DAL.Migrations
                 columns: new[] { "id", "available_tickets", "booked_tickets", "poster", "price", "sold_tickets", "type", "total_tickets" },
                 values: new object[,]
                 {
-                    { new Guid("aaaaaaaa-1111-aaaa-aaaa-aaaaaaaaaaaa"), 70, 10, new Guid("aaaaaaaa-1111-1111-1111-111111111111"), 1500m, 20, "Economy", 100 },
-                    { new Guid("aaaaaaaa-2222-bbbb-bbbb-bbbbbbbbbbbb"), 15, 2, new Guid("aaaaaaaa-1111-1111-1111-111111111111"), 4000m, 3, "VIP", 20 },
-                    { new Guid("bbbbbbbb-1111-cccc-cccc-cccccccccccc"), 50, 10, new Guid("aaaaaaaa-2222-2222-2222-222222222222"), 1200m, 20, "Economy", 80 },
-                    { new Guid("cccccccc-1111-dddd-dddd-dddddddddddd"), 40, 5, new Guid("bbbbbbbb-1111-1111-1111-111111111111"), 1000m, 15, "Economy", 60 }
+                    { new Guid("aaaaaaaa-1111-aaaa-aaaa-aaaaaaaaaaaa"), 0, 0, new Guid("aaaaaaaa-1111-1111-1111-111111111111"), 1500m, 2, "Economy", 2 },
+                    { new Guid("aaaaaaaa-2222-bbbb-bbbb-bbbbbbbbbbbb"), 0, 1, new Guid("aaaaaaaa-1111-1111-1111-111111111111"), 4000m, 0, "VIP", 1 },
+                    { new Guid("bbbbbbbb-1111-cccc-cccc-cccccccccccc"), 0, 0, new Guid("aaaaaaaa-2222-2222-2222-222222222222"), 1200m, 1, "Economy", 1 },
+                    { new Guid("cccccccc-1111-dddd-dddd-dddddddddddd"), 0, 1, new Guid("bbbbbbbb-1111-1111-1111-111111111111"), 1000m, 0, "Economy", 1 }
                 });
 
             migrationBuilder.InsertData(

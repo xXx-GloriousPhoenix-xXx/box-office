@@ -213,10 +213,10 @@ namespace BoxOffice.DAL.Context
                     Id = hamletEconomyId,
                     PosterId = hamletId,
                     Price = 1500,
-                    TotalCount = 100,
-                    AvailableCount = 70,
-                    SoldCount = 20,
-                    BookedCount = 10,
+                    TotalCount = 2,
+                    AvailableCount = 0,
+                    SoldCount = 2,
+                    BookedCount = 0,
                     TicketType = TicketType.Economy
                 },
                 new TicketInfo
@@ -224,10 +224,10 @@ namespace BoxOffice.DAL.Context
                     Id = hamletVipId,
                     PosterId = hamletId,
                     Price = 4000,
-                    TotalCount = 20,
-                    AvailableCount = 15,
-                    SoldCount = 3,
-                    BookedCount = 2,
+                    TotalCount = 1,
+                    AvailableCount = 0,
+                    SoldCount = 0,
+                    BookedCount = 1,
                     TicketType = TicketType.VIP
                 },
                 new TicketInfo
@@ -235,10 +235,10 @@ namespace BoxOffice.DAL.Context
                     Id = romeoEconomyId,
                     PosterId = romeoId,
                     Price = 1200,
-                    TotalCount = 80,
-                    AvailableCount = 50,
-                    SoldCount = 20,
-                    BookedCount = 10,
+                    TotalCount = 1,
+                    AvailableCount = 0,
+                    SoldCount = 1,
+                    BookedCount = 0,
                     TicketType = TicketType.Economy
                 },
                 new TicketInfo
@@ -246,10 +246,10 @@ namespace BoxOffice.DAL.Context
                     Id = seagullEconomyId,
                     PosterId = seagullId,
                     Price = 1000,
-                    TotalCount = 60,
-                    AvailableCount = 40,
-                    SoldCount = 15,
-                    BookedCount = 5,
+                    TotalCount = 1,
+                    AvailableCount = 0,
+                    SoldCount = 0,
+                    BookedCount = 1,
                     TicketType = TicketType.Economy
                 }
             );

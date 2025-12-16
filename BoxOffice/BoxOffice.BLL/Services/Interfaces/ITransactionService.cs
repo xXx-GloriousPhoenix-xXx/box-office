@@ -10,6 +10,6 @@ namespace BoxOffice.BLL.Services.Interfaces
         Task<GetTransactionDto> AddAsync(CreateTransactionDto createDto, CancellationToken ct = default);
         Task DeleteAsync(Guid id, CancellationToken ct = default);
         Task<PagedResponse<GetTransactionDto>> GetCustomerTransactionsAsync(Guid customerId, int page = 1, int itemsPerPage = 10, CancellationToken ct = default);
-        Task<GetTransactionDto> GetTicketTransactionsAsync(Guid ticketId, CancellationToken ct = default);
+        Task<ICollection<GetTransactionDto>> GetTicketTransactionsAsync(Guid ticketId, CancellationToken ct = default);
     }
 }

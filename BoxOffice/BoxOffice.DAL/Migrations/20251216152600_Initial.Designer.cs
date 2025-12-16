@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoxOffice.DAL.Migrations
 {
     [DbContext(typeof(BoxOfficeDbContext))]
-    [Migration("20251216020031_Initial")]
+    [Migration("20251216152600_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -512,46 +512,46 @@ namespace BoxOffice.DAL.Migrations
                         new
                         {
                             Id = new Guid("aaaaaaaa-1111-aaaa-aaaa-aaaaaaaaaaaa"),
-                            AvailableCount = 70,
-                            BookedCount = 10,
+                            AvailableCount = 0,
+                            BookedCount = 0,
                             PosterId = new Guid("aaaaaaaa-1111-1111-1111-111111111111"),
                             Price = 1500m,
-                            SoldCount = 20,
+                            SoldCount = 2,
                             TicketType = "Economy",
-                            TotalCount = 100
+                            TotalCount = 2
                         },
                         new
                         {
                             Id = new Guid("aaaaaaaa-2222-bbbb-bbbb-bbbbbbbbbbbb"),
-                            AvailableCount = 15,
-                            BookedCount = 2,
+                            AvailableCount = 0,
+                            BookedCount = 1,
                             PosterId = new Guid("aaaaaaaa-1111-1111-1111-111111111111"),
                             Price = 4000m,
-                            SoldCount = 3,
+                            SoldCount = 0,
                             TicketType = "VIP",
-                            TotalCount = 20
+                            TotalCount = 1
                         },
                         new
                         {
                             Id = new Guid("bbbbbbbb-1111-cccc-cccc-cccccccccccc"),
-                            AvailableCount = 50,
-                            BookedCount = 10,
+                            AvailableCount = 0,
+                            BookedCount = 0,
                             PosterId = new Guid("aaaaaaaa-2222-2222-2222-222222222222"),
                             Price = 1200m,
-                            SoldCount = 20,
+                            SoldCount = 1,
                             TicketType = "Economy",
-                            TotalCount = 80
+                            TotalCount = 1
                         },
                         new
                         {
                             Id = new Guid("cccccccc-1111-dddd-dddd-dddddddddddd"),
-                            AvailableCount = 40,
-                            BookedCount = 5,
+                            AvailableCount = 0,
+                            BookedCount = 1,
                             PosterId = new Guid("bbbbbbbb-1111-1111-1111-111111111111"),
                             Price = 1000m,
-                            SoldCount = 15,
+                            SoldCount = 0,
                             TicketType = "Economy",
-                            TotalCount = 60
+                            TotalCount = 1
                         });
                 });
 

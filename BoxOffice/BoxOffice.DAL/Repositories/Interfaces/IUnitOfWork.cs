@@ -13,10 +13,6 @@ namespace BoxOffice.DAL.Repositories.Interfaces
         IBaseRepository<TicketInfo> TicketInfos { get; }
         IBaseRepository<Transaction> Transactions { get; }
 
-        //IPosterRepository PosterRepository { get; }
-        //ITicketRepository TicketRepository { get; }
-        //IBookingRepository BookingRepository { get; }
-
         Task<int> CompleteAsync(CancellationToken ct = default);
         Task BeginTransactionAsync(CancellationToken ct = default);
         Task CommitTransactionAsync(CancellationToken ct = default);
