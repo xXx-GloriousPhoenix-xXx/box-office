@@ -37,14 +37,14 @@ namespace BoxOffice.API.Controllers
             return Ok();
         }
 
-        [HttpPost("customer/{id}/{page}/{itemsPerPage}")]
+        [HttpGet("customer/{id}/{page}/{itemsPerPage}")]
         public async Task<ActionResult<PagedResponse<GetTransactionDto>>> GetCustomerTransactionsAsync(Guid id, CancellationToken ct, int page = 1, int itemsPerPage = 10)
         {
             var result = await service.GetCustomerTransactionsAsync(id, page, itemsPerPage, ct);
             return Ok(result);
         }
 
-        [HttpPost("ticket/{id}")]
+        [HttpGet("ticket/{id}")]
         public async Task<ActionResult<GetTransactionDto>> GetTicketTransactionsAsync(Guid id, CancellationToken ct)
         {
             var result = await service.GetTicketTransactionsAsync(id, ct);

@@ -277,7 +277,8 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 1
             }
           },
           {
@@ -286,7 +287,8 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 10
             }
           }
         ],
@@ -2208,7 +2210,7 @@
       }
     },
     "/api/transactions/customer/{id}/{page}/{itemsPerPage}": {
-      "post": {
+      "get": {
         "tags": [
           "Transactions"
         ],
@@ -2268,7 +2270,7 @@
       }
     },
     "/api/transactions/ticket/{id}": {
-      "post": {
+      "get": {
         "tags": [
           "Transactions"
         ],
