@@ -3,16 +3,27 @@
   "WorkspaceRootPath": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.api\\controllers\\authorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|solutionrelative:boxoffice.api\\controllers\\authorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\implementations\\ticketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\implementations\\ticketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\implementations\\authorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\implementations\\authorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.api\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|solutionrelative:boxoffice.api\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\interfaces\\iauthorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\interfaces\\iauthorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dal\\context\\boxofficedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dal\\context\\boxofficedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\mapping\\ticketprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\mapping\\ticketprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/WORKPLACE/BoxOffice/True/SqlTable/dbo.tickets.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.dal\\repositories\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AC8EDF8-E6AF-3CD1-C6D4-CEC11A2ECFB1}|BoxOffice.DAL\\BoxOffice.DAL.csproj|solutionrelative:boxoffice.dal\\repositories\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +33,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 353,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,41 +41,77 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthorsController.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\AuthorsController.cs",
-              "RelativeDocumentMoniker": "BoxOffice.API\\Controllers\\AuthorsController.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\AuthorsController.cs",
-              "RelativeToolTip": "BoxOffice.API\\Controllers\\AuthorsController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAA5wC8AAAAVAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "TicketsController.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\TicketsController.cs",
+              "RelativeDocumentMoniker": "BoxOffice.API\\Controllers\\TicketsController.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\TicketsController.cs",
+              "RelativeToolTip": "BoxOffice.API\\Controllers\\TicketsController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwCMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T02:28:50.658Z",
+              "WhenOpened": "2025-12-16T02:09:11.093Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthorService.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\AuthorService.cs",
-              "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Implementations\\AuthorService.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\AuthorService.cs",
-              "RelativeToolTip": "BoxOffice.BLL\\Services\\Implementations\\AuthorService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "dbo.tickets [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/WORKPLACE/BoxOffice/True/SqlTable/dbo.tickets.sql",
+              "ToolTip": "dbo.tickets [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-12-16T01:53:36.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TicketProfile.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Mapping\\TicketProfile.cs",
+              "RelativeDocumentMoniker": "BoxOffice.BLL\\Mapping\\TicketProfile.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Mapping\\TicketProfile.cs",
+              "RelativeToolTip": "BoxOffice.BLL\\Mapping\\TicketProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T02:24:19.112Z",
+              "WhenOpened": "2025-12-16T01:42:36.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Repositories\\Interfaces\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "BoxOffice.DAL\\Repositories\\Interfaces\\IUnitOfWork.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Repositories\\Interfaces\\IUnitOfWork.cs",
+              "RelativeToolTip": "BoxOffice.DAL\\Repositories\\Interfaces\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T01:34:26.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TicketService.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\TicketService.cs",
+              "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Implementations\\TicketService.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\TicketService.cs",
+              "RelativeToolTip": "BoxOffice.BLL\\Services\\Implementations\\TicketService.cs",
+              "ViewState": "AgIAAMsAAAAAAAAAAAAEwN4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T01:31:08.998Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IAuthorService.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Interfaces\\IAuthorService.cs",
-              "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Interfaces\\IAuthorService.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Interfaces\\IAuthorService.cs",
-              "RelativeToolTip": "BoxOffice.BLL\\Services\\Interfaces\\IAuthorService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABwAAAAAAAAAA==",
+              "Title": "BoxOfficeDbContext.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Context\\BoxOfficeDbContext.cs",
+              "RelativeDocumentMoniker": "BoxOffice.DAL\\Context\\BoxOfficeDbContext.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.DAL\\Context\\BoxOfficeDbContext.cs",
+              "RelativeToolTip": "BoxOffice.DAL\\Context\\BoxOfficeDbContext.cs",
+              "ViewState": "AgIAACgBAAAAAAAAAAAiwEwBAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T02:23:02.965Z",
+              "WhenOpened": "2025-12-16T01:54:29.401Z",
               "EditorCaption": ""
             }
           ]

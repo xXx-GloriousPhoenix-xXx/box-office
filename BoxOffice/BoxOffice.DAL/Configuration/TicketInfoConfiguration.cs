@@ -16,9 +16,9 @@ namespace BoxOffice.DAL.Configuration
             // Якщо видаляється афіша - видаляються зв'язані з нею види квитків
 
             e.Property(e => e.Price)
-                .HasPrecision(5, 2)
+                .HasPrecision(6, 2)
                 .IsRequired();
-            // Максимум 999.99
+            // Максимум 9999.99
 
             e.Property(e => e.TicketType)
                 .HasConversion<string>()

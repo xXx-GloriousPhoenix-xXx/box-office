@@ -5,10 +5,10 @@ namespace BoxOffice.BLL.Services.Interfaces
 {
     public interface ITicketInfoService
     {
-        Task<PagedResponse<GetTicketInfoDto>> GetAllAsync(int page, int itemsPerPage);
-        Task<GetTicketInfoDto> GetByIdAsync(Guid id);
-        Task<GetTicketInfoDto> AddAsync(CreateTicketInfoDto createDto);
-        Task<GetTicketInfoDto> UpdateAsync(Guid id, UpdateTicketInfoDto updateDto);
-        Task DeleteAsync(Guid id);
+        Task<PagedResponse<GetTicketInfoDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default);
+        Task<GetTicketInfoDto> GetByIdAsync(Guid id, CancellationToken ct = default);
+        Task<GetTicketInfoDto> AddAsync(CreateTicketInfoDto createDto, CancellationToken ct = default);
+        Task<GetTicketInfoDto> UpdateAsync(Guid id, UpdateTicketInfoDto updateDto, CancellationToken ct = default);
+        Task DeleteAsync(Guid id, CancellationToken ct = default);
     }
 }

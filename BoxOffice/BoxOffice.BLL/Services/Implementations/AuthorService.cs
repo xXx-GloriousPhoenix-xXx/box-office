@@ -2,7 +2,7 @@
 using BoxOffice.BLL.DTOs.AdditionalDtos;
 using BoxOffice.BLL.DTOs.AuthorDtos;
 using BoxOffice.BLL.Services.Interfaces;
-using BoxOffice.DAL.Exceptions;
+using BoxOffice.BLL.Exceptions;
 using BoxOffice.DAL.Models.Entities;
 using BoxOffice.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -72,7 +72,7 @@ namespace BoxOffice.BLL.Services.Implementations
             LogAuthorDeleted(author.Name, author.Id);
         }
 
-        public async Task<PagedResponse<GetAuthorDto>> GetAllAsync(int page, int itemsPerPage, CancellationToken ct = default)
+        public async Task<PagedResponse<GetAuthorDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default)
         {
             if (page < 1)
             {

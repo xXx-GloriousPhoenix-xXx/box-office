@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BoxOffice.BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d62c6379d4454dd0ab768d9241988202b7a909b4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c5a15275ac8f2817d729b5035edfbcc20c8784e")]
 [assembly: System.Reflection.AssemblyProductAttribute("BoxOffice.BLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BoxOffice.BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

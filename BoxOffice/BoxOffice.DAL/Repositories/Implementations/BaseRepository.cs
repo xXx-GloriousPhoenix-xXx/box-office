@@ -22,7 +22,7 @@ namespace BoxOffice.DAL.Repositories.Implementations
         public async Task<T?> GetByIdAsync(
             Guid id,
             CancellationToken ct = default,
-            params Expression<Func<T, object>>[] includes)
+            params Expression<Func<T, object?>>[] includes)
         {
             if (includes == null || includes.Length == 0)
             {

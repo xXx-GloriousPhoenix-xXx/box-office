@@ -40,7 +40,7 @@ namespace BoxOffice.API.Controllers
         [HttpPost("customer/{id}/{page}/{itemsPerPage}")]
         public async Task<ActionResult<PagedResponse<GetTransactionDto>>> GetCustomerTransactionsAsync(Guid id, int page, int itemsPerPage)
         {
-            var result = await service.GetCustomerTransactionsAsync(page, itemsPerPage, id);
+            var result = await service.GetCustomerTransactionsAsync(id, page, itemsPerPage);
             return Ok(result);
         }
 

@@ -18,7 +18,7 @@ namespace BoxOffice.API.Controllers
         }
 
         [HttpGet("{page}/{itemsPerPage}")]
-        public async Task<ActionResult<PagedResponse<GetAuthorDto>>> GetAllAsync(int page, int itemsPerPage, CancellationToken ct)
+        public async Task<ActionResult<PagedResponse<GetAuthorDto>>> GetAllAsync(CancellationToken ct, int page = 1, int itemsPerPage = 10)
         {
             var result = await service.GetAllAsync(page, itemsPerPage, ct);
             return Ok(result);

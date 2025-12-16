@@ -5,7 +5,7 @@ namespace BoxOffice.BLL.Services.Interfaces
 {
     public interface IAuthorService
     {
-        Task<PagedResponse<GetAuthorDto>> GetAllAsync(int page, int itemsPerPage, CancellationToken ct = default);
+        Task<PagedResponse<GetAuthorDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default);
         Task<GetAuthorDto> GetByIdAsync(Guid id, CancellationToken ct = default);
         Task<GetAuthorDto> AddAsync(CreateAuthorDto createDto, CancellationToken ct = default);
         Task<GetAuthorDto> UpdateAsync(Guid id, UpdateAuthorDto updateDto, CancellationToken ct = default);

@@ -5,10 +5,10 @@ namespace BoxOffice.BLL.Services.Interfaces
 {
     public interface IGenreService
     {
-        Task<PagedResponse<GetGenreDto>> GetAllAsync(int page, int itemsPerPage);
-        Task<GetGenreDto> GetByIdAsync(Guid id);
-        Task<GetGenreDto> AddAsync(CreateGenreDto createDto);
-        Task<GetGenreDto> UpdateAsync(Guid id, UpdateGenreDto updateDto);
-        Task DeleteAsync(Guid id);
+        Task<PagedResponse<GetGenreDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default);
+        Task<GetGenreDto> GetByIdAsync(Guid id, CancellationToken ct = default);
+        Task<GetGenreDto> AddAsync(CreateGenreDto createDto, CancellationToken ct = default);
+        Task<GetGenreDto> UpdateAsync(Guid id, UpdateGenreDto updateDto, CancellationToken ct = default);
+        Task DeleteAsync(Guid id, CancellationToken ct = default);
     }
 }

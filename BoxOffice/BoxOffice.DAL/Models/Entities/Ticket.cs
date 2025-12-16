@@ -28,7 +28,7 @@ namespace BoxOffice.DAL.Models.Entities
         public Booking? Booking { get; set; }
 
         [Column(nameof(TicketInfoId))]
-        public required TicketInfo TicketInfo { get; set; }
+        public TicketInfo? TicketInfo { get; set; }
 
         [Column(nameof(CustomerId))]
         public Customer? Customer { get; set; }

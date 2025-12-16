@@ -23,8 +23,8 @@ namespace BoxOffice.DAL.Configuration
             // Якщо видалити клієнта - транзації видаляються
 
             e.Property(t => t.Amount)
-                .HasPrecision(7, 2);
-            // Максимум 99_999.99
+                .HasPrecision(8, 2);
+            // Максимум 999_999.99
 
             e.Property(e => e.TransactionType)
                 .HasConversion<string>()

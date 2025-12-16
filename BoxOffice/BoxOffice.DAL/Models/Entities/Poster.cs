@@ -24,7 +24,7 @@ namespace BoxOffice.DAL.Models.Entities
         public Guid AuthorId { get; set; }
 
         [Column(nameof(AuthorId))]
-        public required Author Author { get; set; }
+        public Author? Author { get; set; }
 
         public virtual ICollection<Genre> Genres { get; set; } = [];
 

@@ -13,7 +13,7 @@ namespace BoxOffice.API.Controllers
         [HttpGet("{page:int}/{itemsPerPage:int}")]
         public async Task<ActionResult<PagedResponse<GetPosterWithTicketInfosDto>>> GetAllAsync(int page, int itemsPerPage, [FromForm] SearchPosterDto? dto)
         {
-            var result = await service.GetAllAsync(page, itemsPerPage, dto);
+            var result = await service.GetAllAsync(dto, page, itemsPerPage);
             return Ok(result);
         }
 

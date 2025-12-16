@@ -18,6 +18,9 @@ namespace BoxOffice.DAL.Models.Entities
         [Column("state")]
         public BookingState State { get; set; }
 
-        public required virtual Ticket Ticket { get; set; }
+        [Column("ticket_id")]
+        public Guid TicketId { get; set; }
+
+        public virtual Ticket? Ticket { get; set; }
     }
 }

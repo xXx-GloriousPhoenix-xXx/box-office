@@ -28,7 +28,7 @@ namespace BoxOffice.DAL.Models.Entities
         public TicketType TicketType { get; set; }
 
         [Column(nameof(PosterId))]
-        public required Poster Poster { get; set; }
+        public Poster? Poster { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; } = [];
     }
