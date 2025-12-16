@@ -637,44 +637,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Name",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "AuthorId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "Description",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Venue",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Date",
-        "Type": "System.DateOnly",
-        "IsRequired": false
-      },
-      {
-        "Name": "Duration",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Genres",
-        "Type": "System.Collections.Generic.ICollection\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "TicketInfos",
-        "Type": "System.Collections.Generic.ICollection\u00601[[BoxOffice.BLL.DTOs.TicketInfoDtos.CreateTicketInfoAdditionDto, BoxOffice.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": false
+        "Name": "dto",
+        "Type": "BoxOffice.BLL.DTOs.PosterDtos.CreatePosterDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -858,16 +823,6 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "page",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "itemsPerPage",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
         "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
@@ -926,11 +881,21 @@
         "Name": "SortAscending",
         "Type": "System.Boolean",
         "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "itemsPerPage",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "BoxOffice.BLL.DTOs.AdditionalDtos.PagedResponse\u00601[[BoxOffice.BLL.DTOs.PosterDtos.GetPosterWithTicketInfosDto, BoxOffice.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "BoxOffice.BLL.DTOs.AdditionalDtos.PagedResponse\u00601[[BoxOffice.BLL.DTOs.PosterDtos.GetPosterDto, BoxOffice.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

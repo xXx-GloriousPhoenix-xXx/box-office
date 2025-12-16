@@ -1047,12 +1047,106 @@
         ],
         "parameters": [
           {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Venue",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AuthorName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Genres",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "DateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "DateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "DurationMin",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "DurationMax",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PriceMin",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "PriceMax",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "SearchCriteria",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PosterSortCriteria"
+            }
+          },
+          {
+            "name": "SortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "page",
             "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 1
             }
           },
           {
@@ -1061,121 +1155,28 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 10
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "Name": {
-                    "type": "string"
-                  },
-                  "Venue": {
-                    "type": "string"
-                  },
-                  "AuthorName": {
-                    "type": "string"
-                  },
-                  "Genres": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "DateFrom": {
-                    "type": "string",
-                    "format": "date"
-                  },
-                  "DateTo": {
-                    "type": "string",
-                    "format": "date"
-                  },
-                  "DurationMin": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "DurationMax": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "PriceMin": {
-                    "type": "number",
-                    "format": "double"
-                  },
-                  "PriceMax": {
-                    "type": "number",
-                    "format": "double"
-                  },
-                  "SearchCriteria": {
-                    "$ref": "#/components/schemas/PosterSortCriteria"
-                  },
-                  "SortAscending": {
-                    "type": "boolean"
-                  }
-                }
-              },
-              "encoding": {
-                "Name": {
-                  "style": "form"
-                },
-                "Venue": {
-                  "style": "form"
-                },
-                "AuthorName": {
-                  "style": "form"
-                },
-                "Genres": {
-                  "style": "form"
-                },
-                "DateFrom": {
-                  "style": "form"
-                },
-                "DateTo": {
-                  "style": "form"
-                },
-                "DurationMin": {
-                  "style": "form"
-                },
-                "DurationMax": {
-                  "style": "form"
-                },
-                "PriceMin": {
-                  "style": "form"
-                },
-                "PriceMax": {
-                  "style": "form"
-                },
-                "SearchCriteria": {
-                  "style": "form"
-                },
-                "SortAscending": {
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetPosterWithTicketInfosDtoPagedResponse"
+                  "$ref": "#/components/schemas/GetPosterDtoPagedResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetPosterWithTicketInfosDtoPagedResponse"
+                  "$ref": "#/components/schemas/GetPosterDtoPagedResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetPosterWithTicketInfosDtoPagedResponse"
+                  "$ref": "#/components/schemas/GetPosterDtoPagedResponse"
                 }
               }
             }
@@ -1350,80 +1351,19 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "required": [
-                  "AuthorId",
-                  "Date",
-                  "Description",
-                  "Duration",
-                  "Genres",
-                  "Name",
-                  "TicketInfos",
-                  "Venue"
-                ],
-                "type": "object",
-                "properties": {
-                  "Name": {
-                    "type": "string"
-                  },
-                  "AuthorId": {
-                    "type": "string",
-                    "format": "uuid"
-                  },
-                  "Description": {
-                    "type": "string"
-                  },
-                  "Venue": {
-                    "type": "string"
-                  },
-                  "Date": {
-                    "type": "string",
-                    "format": "date"
-                  },
-                  "Duration": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "Genres": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "TicketInfos": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/CreateTicketInfoAdditionDto"
-                    }
-                  }
-                }
-              },
-              "encoding": {
-                "Name": {
-                  "style": "form"
-                },
-                "AuthorId": {
-                  "style": "form"
-                },
-                "Description": {
-                  "style": "form"
-                },
-                "Venue": {
-                  "style": "form"
-                },
-                "Date": {
-                  "style": "form"
-                },
-                "Duration": {
-                  "style": "form"
-                },
-                "Genres": {
-                  "style": "form"
-                },
-                "TicketInfos": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/CreatePosterDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePosterDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePosterDto"
               }
             }
           }
@@ -2321,6 +2261,60 @@
         ],
         "type": "string"
       },
+      "CreatePosterDto": {
+        "required": [
+          "authorId",
+          "date",
+          "description",
+          "duration",
+          "genres",
+          "name",
+          "ticketInfos",
+          "venue"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "authorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "venue": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "ticketInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateTicketInfoAdditionDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateTicketInfoAdditionDto": {
         "type": "object",
         "properties": {
@@ -2741,6 +2735,35 @@
         },
         "additionalProperties": false
       },
+      "GetPosterDtoPagedResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetPosterDto"
+            },
+            "nullable": true
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetPosterStatsDto": {
         "required": [
           "author",
@@ -2865,35 +2888,6 @@
               "$ref": "#/components/schemas/GetTicketInfoAdditionDto"
             },
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetPosterWithTicketInfosDtoPagedResponse": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GetPosterWithTicketInfosDto"
-            },
-            "nullable": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "currentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -3234,10 +3228,12 @@
       },
       "PosterSortCriteria": {
         "enum": [
+          "name",
           "date",
           "duration",
-          "price",
-          "name"
+          "venue",
+          "author",
+          "price"
         ],
         "type": "string"
       },

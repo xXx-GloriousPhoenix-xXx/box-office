@@ -2,9 +2,11 @@
 {
     public enum PosterSortCriteria
     {
+        Name,
         Date,
         Duration,
-        Price,
-        Name
-    };
+        Venue,
+        Author,
+        Price
+    }
 }

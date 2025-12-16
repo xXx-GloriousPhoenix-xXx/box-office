@@ -6,7 +6,7 @@ namespace BoxOffice.BLL.Services.Interfaces
 {
     public interface IPosterService
     {
-        Task<PagedResponse<GetPosterWithTicketInfosDto>> GetAllAsync(SearchPosterDto? dto, int page = 1, int itemsPerPage = 10, CancellationToken ct = default);
+        Task<PagedResponse<GetPosterDto>> GetAllAsync(SearchPosterDto? dto, int page = 1, int itemsPerPage = 10, CancellationToken ct = default);
         Task<GetPosterWithTicketInfosDto> GetByIdAsync(Guid id, CancellationToken ct = default);
         Task<GetPosterWithTicketInfosDto> AddAsync(CreatePosterDto createDto, CancellationToken ct = default);
         Task<GetPosterDto> UpdateAsync(Guid id, UpdatePosterDto updateDto, CancellationToken ct = default);

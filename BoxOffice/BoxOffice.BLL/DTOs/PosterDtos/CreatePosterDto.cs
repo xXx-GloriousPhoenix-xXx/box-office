@@ -1,8 +1,4 @@
-﻿using BoxOffice.BLL.DTOs.AdditionalDtos;
-using BoxOffice.BLL.DTOs.TicketInfoDtos;
-using BoxOffice.DAL.Models.Entities;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using BoxOffice.BLL.DTOs.TicketInfoDtos;
 
 namespace BoxOffice.BLL.DTOs.PosterDtos
 {
