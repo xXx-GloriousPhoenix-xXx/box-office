@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\mapping\\transactionprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\mapping\\transactionprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\implementations\\genreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\implementations\\genreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\implementations\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\implementations\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\interfaces\\igenreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\interfaces\\igenreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.bll\\services\\interfaces\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87C794CB-F191-33D0-2F4E-BEC63AD1C5A1}|BoxOffice.BLL\\BoxOffice.BLL.csproj|solutionrelative:boxoffice.bll\\services\\interfaces\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|f:\\programmes\\github\\reps\\box-office\\boxoffice\\boxoffice.api\\controllers\\genrescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F516BBE5-2B67-E952-ACDC-17903C95C7C7}|BoxOffice.API\\BoxOffice.API.csproj|solutionrelative:boxoffice.api\\controllers\\genrescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,40 +31,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TransactionProfile.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Mapping\\TransactionProfile.cs",
-              "RelativeDocumentMoniker": "BoxOffice.BLL\\Mapping\\TransactionProfile.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Mapping\\TransactionProfile.cs",
-              "RelativeToolTip": "BoxOffice.BLL\\Mapping\\TransactionProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
+              "Title": "GenreService.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\GenreService.cs",
+              "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Implementations\\GenreService.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\GenreService.cs",
+              "RelativeToolTip": "BoxOffice.BLL\\Services\\Implementations\\GenreService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T17:48:18.378Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TransactionService.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\TransactionService.cs",
-              "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Implementations\\TransactionService.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Implementations\\TransactionService.cs",
-              "RelativeToolTip": "BoxOffice.BLL\\Services\\Implementations\\TransactionService.cs",
-              "ViewState": "AgIAACYBAAAAAAAAAAAqwDIBAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T17:36:24.297Z",
+              "WhenOpened": "2025-12-16T18:11:57.501Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ITransactionService.cs",
-              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Interfaces\\ITransactionService.cs",
-              "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Interfaces\\ITransactionService.cs",
-              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Interfaces\\ITransactionService.cs",
-              "RelativeToolTip": "BoxOffice.BLL\\Services\\Interfaces\\ITransactionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Title": "GenresController.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\GenresController.cs",
+              "RelativeDocumentMoniker": "BoxOffice.API\\Controllers\\GenresController.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.API\\Controllers\\GenresController.cs",
+              "RelativeToolTip": "BoxOffice.API\\Controllers\\GenresController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T16:58:46.168Z",
+              "WhenOpened": "2025-12-16T18:03:25.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IGenreService.cs",
+              "DocumentMoniker": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Interfaces\\IGenreService.cs",
+              "RelativeDocumentMoniker": "BoxOffice.BLL\\Services\\Interfaces\\IGenreService.cs",
+              "ToolTip": "F:\\Programmes\\Github\\Reps\\box-office\\BoxOffice\\BoxOffice.BLL\\Services\\Interfaces\\IGenreService.cs",
+              "RelativeToolTip": "BoxOffice.BLL\\Services\\Interfaces\\IGenreService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T18:02:43.794Z",
               "EditorCaption": ""
             }
           ]
