@@ -30,7 +30,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<GetGenreDto> AddAsync(CreateGenreDto createDto, CancellationToken ct = default)
         {
-            // Check if genre with the same name already exists (case-insensitive)
             var existingGenre = await _unitOfWork.Genres
                 .ExistsAsync(g => g.Name.ToLower() == createDto.Name.ToLower(), ct);
 
@@ -60,7 +59,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Genre with id {id} not found");
             }
 
-            // Check if genre has any posters associated
             if (genre.Posters.Count != 0)
             {
                 var postersCount = genre.Posters.Count;
@@ -77,7 +75,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<PagedResponse<GetGenreDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default)
         {
-            // Validate and adjust pagination parameters
             if (page < 1)
             {
                 page = 1;

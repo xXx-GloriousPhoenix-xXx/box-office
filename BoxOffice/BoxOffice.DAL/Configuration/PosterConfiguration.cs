@@ -9,14 +9,11 @@ namespace BoxOffice.DAL.Configuration
     {
         public void Configure(EntityTypeBuilder<Poster> e)
         {
-            // ===== Author — Poster (1:N) =====
             e.HasOne(p => p.Author)
             .WithMany(a => a.Posters)
             .HasForeignKey(p => p.AuthorId)
             .OnDelete(DeleteBehavior.Restrict);
-            // Не можна видалити автора, якщо у нього є афіши
 
-            // ===== Poster — Genre (M:N) =====
             e.HasMany(p => p.Genres)
             .WithMany(g => g.Posters)
             .UsingEntity<Dictionary<string, object>>(
@@ -35,8 +32,6 @@ namespace BoxOffice.DAL.Configuration
                 {
                     j.HasKey("poster_id", "genre_id");
                 });
-            // Якщо видаляється афіша - видаляються зв'язки з жанром
-            // Якщо видаляється жанр - видаляються зв'язки з афішами
         }
     }
 }

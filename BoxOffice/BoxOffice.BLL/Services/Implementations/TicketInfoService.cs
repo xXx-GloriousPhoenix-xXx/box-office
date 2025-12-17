@@ -31,14 +31,12 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<GetTicketInfoDto> AddAsync(CreateTicketInfoDto createDto, CancellationToken ct = default)
         {
-            // Check if Poster exists
             var poster = await _unitOfWork.Posters.GetByIdAsync(createDto.PosterId, ct);
             if (poster == null)
             {
                 throw new NotFoundException($"Poster with id {createDto.PosterId} not found");
             }
 
-            // Check if TicketInfo with same type already exists for this poster
             var ticketInfoExists = await _unitOfWork.TicketInfos
                 .ExistsAsync(ti => ti.PosterId == createDto.PosterId
                     && ti.TicketType == createDto.TicketType, ct);
@@ -49,13 +47,11 @@ namespace BoxOffice.BLL.Services.Implementations
                     $"TicketInfo with type '{createDto.TicketType}' already exists for poster {createDto.PosterId}");
             }
 
-            // Validate TotalCount
             if (createDto.TotalCount <= 0)
             {
                 throw new ValidationException("TotalCount must be greater than 0");
             }
 
-            // Validate Price
             if (createDto.Price <= 0)
             {
                 throw new ValidationException("Price must be greater than 0");
@@ -85,7 +81,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"TicketInfo with id {id} not found");
             }
 
-            // Check if there are any tickets associated
             if (ticketInfo.Tickets.Count > 0)
             {
                 var ticketsCount = ticketInfo.Tickets.Count;
@@ -99,7 +94,6 @@ namespace BoxOffice.BLL.Services.Implementations
                         "Cancel or process those tickets first.");
                 }
 
-                // Check if there are transactions for available tickets
                 foreach (var ticket in ticketInfo.Tickets)
                 {
                     var ticketWithTransactions = await _unitOfWork.Tickets
@@ -114,11 +108,9 @@ namespace BoxOffice.BLL.Services.Implementations
                     }
                 }
 
-                // Start transaction
                 await _unitOfWork.BeginTransactionAsync(ct);
                 try
                 {
-                    // Delete all associated tickets
                     foreach (var ticket in ticketInfo.Tickets)
                     {
                         _unitOfWork.Tickets.Delete(ticket);
@@ -137,7 +129,6 @@ namespace BoxOffice.BLL.Services.Implementations
             }
             else
             {
-                // No tickets, just delete the TicketInfo
                 _unitOfWork.TicketInfos.Delete(ticketInfo);
                 await _unitOfWork.CompleteAsync(ct);
             }
@@ -147,7 +138,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<PagedResponse<GetTicketInfoDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default)
         {
-            // Validate and adjust pagination parameters
             if (page < 1)
             {
                 page = 1;
@@ -207,7 +197,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"TicketInfo with id {id} not found");
             }
 
-            // Validate new price
             if (updateDto.Price.HasValue)
             {
                 if (updateDto.Price.Value <= 0)
@@ -215,7 +204,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     throw new ValidationException("Price must be greater than 0");
                 }
 
-                // Check if there are already sold or booked tickets
                 var hasSoldOrBookedTickets = await _unitOfWork.Tickets
                     .ExistsAsync(t => t.TicketInfoId == id
                         && (t.TicketState == TicketState.Sold || t.TicketState == TicketState.Booked), ct);
@@ -230,8 +218,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 ticketInfo.Price = updateDto.Price.Value;
             }
 
-            // You can add more updateable fields here if needed
-            // For example: TotalCount, but that would require recalculating AvailableCount
 
             _unitOfWork.TicketInfos.Update(ticketInfo);
             await _unitOfWork.CompleteAsync(ct);

@@ -163,18 +163,7 @@ namespace BoxOffice.BLL.Services.Implementations
             var result = _mapper.Map<GetCustomerWithTicketsDto>(customer);
             result.Tickets = _mapper.Map<List<GetTicketAdditionDto>>(customer.Tickets);
 
-            // Load additional ticket details if needed
-            //foreach (var ticket in customer.Tickets)
-            //{
-            //    var fullTicket = await _unitOfWork.Tickets
-            //        .GetByIdAsync(ticket.Id, ct,
-            //            includes: t => t.TicketInfo);
 
-            //    if (fullTicket?.TicketInfo != null)
-            //    {
-            //        // You can add more details here if needed
-            //    }
-            //}
 
             return result;
         }

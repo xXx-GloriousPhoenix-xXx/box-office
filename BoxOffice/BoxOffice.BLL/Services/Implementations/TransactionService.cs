@@ -28,14 +28,12 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<GetTransactionDto> AddAsync(CreateTransactionDto createDto, CancellationToken ct = default)
         {
-            // Validate Customer exists
             var customer = await _unitOfWork.Customers.GetByIdAsync(createDto.CustomerId, ct);
             if (customer == null)
             {
                 throw new NotFoundException($"Customer with id {createDto.CustomerId} not found");
             }
 
-            // Validate Ticket exists
             var ticket = await _unitOfWork.Tickets
                 .GetByIdAsync(createDto.TicketId, ct,
                     includes: t => t.TicketInfo!);
@@ -45,13 +43,11 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Ticket with id {createDto.TicketId} not found");
             }
 
-            // Validate amount
             if (createDto.Amount <= 0)
             {
                 throw new ValidationException("Amount must be greater than 0");
             }
 
-            // For purchase transactions, validate ticket state
             if (createDto.TransactionType == TransactionType.Purchase)
             {
                 if (ticket.TicketState != TicketState.Sold)
@@ -61,7 +57,6 @@ namespace BoxOffice.BLL.Services.Implementations
                         "Ticket must be in Sold state.");
                 }
 
-                // Check if purchase transaction already exists for this ticket
                 var existingPurchase = await _unitOfWork.Transactions
                     .ExistsAsync(t => t.TicketId == createDto.TicketId
                         && t.TransactionType == TransactionType.Purchase, ct);
@@ -71,7 +66,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     throw new ValidationException("Purchase transaction already exists for this ticket");
                 }
 
-                // Validate amount matches ticket price
                 if (ticket.TicketInfo != null && Math.Abs(createDto.Amount - ticket.TicketInfo.Price) > 0.01m)
                 {
                     throw new ValidationException(
@@ -79,7 +73,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 }
             }
 
-            // For refund transactions, validate ticket was purchased
             if (createDto.TransactionType == TransactionType.Refund)
             {
                 if (ticket.TicketState != TicketState.Sold)
@@ -89,7 +82,6 @@ namespace BoxOffice.BLL.Services.Implementations
                         "Only sold tickets can be refunded.");
                 }
 
-                // Check if ticket has a purchase transaction
                 var purchaseTransaction = await _unitOfWork.Transactions
                     .FindAsync(t => t.TicketId == createDto.TicketId
                         && t.TransactionType == TransactionType.Purchase, ct);
@@ -99,7 +91,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     throw new BusinessException("Cannot refund ticket that doesn't have a purchase transaction");
                 }
 
-                // For refunds, amount should be negative or we can validate it matches purchase amount
                 var purchaseAmount = purchaseTransaction.First().Amount;
                 if (Math.Abs(createDto.Amount + purchaseAmount) > 0.01m)
                 {
@@ -108,22 +99,18 @@ namespace BoxOffice.BLL.Services.Implementations
                 }
             }
 
-            // Create transaction
             var transaction = _mapper.Map<Transaction>(createDto);
             transaction.Date = DateOnly.FromDateTime(DateTime.UtcNow);
 
-            // For refunds, update ticket state
             if (createDto.TransactionType == TransactionType.Refund)
             {
                 await _unitOfWork.BeginTransactionAsync(ct);
                 try
                 {
-                    // Update ticket state back to Available
                     ticket.TicketState = TicketState.Available;
                     ticket.SoldDate = null;
                     ticket.CustomerId = null;
 
-                    // Update TicketInfo counts
                     if (ticket.TicketInfo != null)
                     {
                         ticket.TicketInfo.SoldCount--;
@@ -145,7 +132,6 @@ namespace BoxOffice.BLL.Services.Implementations
             }
             else
             {
-                // For purchase transactions, just add the transaction
                 _unitOfWork.Transactions.Add(transaction);
                 await _unitOfWork.CompleteAsync(ct);
             }
@@ -164,10 +150,8 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Transaction with id {id} not found");
             }
 
-            // Check transaction type - refunds might have side effects
             if (transaction.TransactionType == TransactionType.Refund)
             {
-                // For refunds, we need to reverse the ticket state changes
                 var ticket = await _unitOfWork.Tickets
                     .GetByIdAsync(transaction.TicketId, ct,
                         includes: t => t.TicketInfo!);
@@ -177,12 +161,10 @@ namespace BoxOffice.BLL.Services.Implementations
                     await _unitOfWork.BeginTransactionAsync(ct);
                     try
                     {
-                        // Reverse ticket state back to Sold
                         ticket.TicketState = TicketState.Sold;
                         ticket.SoldDate = DateOnly.FromDateTime(DateTime.UtcNow);
                         ticket.CustomerId = transaction.CustomerId;
 
-                        // Update TicketInfo counts
                         if (ticket.TicketInfo != null)
                         {
                             ticket.TicketInfo.SoldCount++;
@@ -210,7 +192,6 @@ namespace BoxOffice.BLL.Services.Implementations
             }
             else
             {
-                // For purchase transactions, just delete
                 _unitOfWork.Transactions.Delete(transaction);
                 await _unitOfWork.CompleteAsync(ct);
             }
@@ -220,7 +201,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<PagedResponse<GetTransactionDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default)
         {
-            // Validate and adjust pagination parameters
             if (page < 1)
             {
                 page = 1;
@@ -261,7 +241,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<PagedResponse<GetTransactionDto>> GetCustomerTransactionsAsync(Guid customerId, int page = 1, int itemsPerPage = 10, CancellationToken ct = default)
         {
-            // Validate customer exists
             var customerExists = await _unitOfWork.Customers
                 .ExistsAsync(c => c.Id == customerId, ct);
 
@@ -270,7 +249,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Customer with id {customerId} not found");
             }
 
-            // Validate and adjust pagination parameters
             if (page < 1)
             {
                 page = 1;
@@ -311,7 +289,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<ICollection<GetTransactionDto>> GetTicketTransactionsAsync(Guid ticketId, CancellationToken ct = default)
         {
-            // Validate ticket exists
             var ticketExists = await _unitOfWork.Tickets
                 .ExistsAsync(t => t.Id == ticketId, ct);
 

@@ -8,22 +8,18 @@ namespace BoxOffice.DAL.Configuration
     {
         public void Configure(EntityTypeBuilder<TicketInfo> e)
         {
-            // ===== Poster — TicketInfo (1:N) =====
             e.HasOne(ti => ti.Poster)
             .WithMany(p => p.TicketInfos)
             .HasForeignKey(ti => ti.PosterId)
             .OnDelete(DeleteBehavior.Cascade);
-            // Якщо видаляється афіша - видаляються зв'язані з нею види квитків
 
             e.Property(e => e.Price)
                 .HasPrecision(6, 2)
                 .IsRequired();
-            // Максимум 9999.99
 
             e.Property(e => e.TicketType)
                 .HasConversion<string>()
                 .HasMaxLength(16);
-            // Запис типів у рядок
         }
     }
 }

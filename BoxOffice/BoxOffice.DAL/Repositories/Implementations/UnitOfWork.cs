@@ -19,9 +19,6 @@ namespace BoxOffice.DAL.Repositories.Implementations
         private IBaseRepository<Transaction>? _transactions;
         private IBaseRepository<Genre>? _genres;
 
-        //private IPosterRepository? _posterRepository;
-        //private ITicketRepository? _ticketRepository;
-        //private IBookingRepository? _bookingRepository;
 
         public IBaseRepository<Author> Authors =>
             _authors ??= new BaseRepository<Author>(_context);
@@ -47,14 +44,8 @@ namespace BoxOffice.DAL.Repositories.Implementations
         public IBaseRepository<Genre> Genres =>
             _genres ??= new BaseRepository<Genre>(_context);
 
-        //public IPosterRepository PosterRepository =>
-        //    _posterRepository ??= new PosterRepository(_context);
 
-        //public ITicketRepository TicketRepository =>
-        //    _ticketRepository ??= new TicketRepository(_context);
 
-        //public IBookingRepository BookingRepository =>
-        //    _bookingRepository ??= new BookingRepository(_context);
 
         public async Task<int> CompleteAsync(CancellationToken ct = default)
         {

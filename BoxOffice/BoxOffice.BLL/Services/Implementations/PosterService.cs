@@ -35,14 +35,12 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<GetPosterWithTicketInfosDto> AddAsync(CreatePosterDto createDto, CancellationToken ct = default)
         {
-            // Validate Author exists
             var author = await _unitOfWork.Authors.GetByIdAsync(createDto.AuthorId, ct);
             if (author == null)
             {
                 throw new NotFoundException($"Author with id {createDto.AuthorId} not found");
             }
 
-            // Validate all genres exist
             var genres = new List<Genre>();
             foreach (var genreName in createDto.Genres)
             {
@@ -57,7 +55,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 genres.Add(genre);
             }
 
-            // Check if poster with same name already exists
             var posterExists = await _unitOfWork.Posters
                 .ExistsAsync(p => p.Name.ToLower() == createDto.Name.ToLower(), ct);
 
@@ -66,19 +63,16 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new ValidationException($"Poster with name '{createDto.Name}' already exists");
             }
 
-            // Validate date is in the future
             if (createDto.Date < DateOnly.FromDateTime(DateTime.UtcNow))
             {
                 throw new ValidationException("Poster date must be in the future");
             }
 
-            // Validate duration
             if (createDto.Duration <= 0)
             {
                 throw new ValidationException("Duration must be greater than 0");
             }
 
-            // Validate TicketInfos
             foreach (var ticketInfoDto in createDto.TicketInfos)
             {
                 if (ticketInfoDto.TotalCount <= 0)
@@ -90,7 +84,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     throw new ValidationException($"TicketInfo {ticketInfoDto.TicketType}: Price must be greater than 0");
                 }
 
-                // Validate unique TicketType
                 var typeCount = createDto.TicketInfos
                     .Count(t => t.TicketType == ticketInfoDto.TicketType);
                 if (typeCount > 1)
@@ -99,23 +92,18 @@ namespace BoxOffice.BLL.Services.Implementations
                 }
             }
 
-            // Create poster
             var poster = _mapper.Map<Poster>(createDto);
             poster.Genres = genres;
             poster.Author = author;
 
-            // Start transaction for creating poster with ticket infos and tickets
             await _unitOfWork.BeginTransactionAsync(ct);
             try
             {
-                // Add poster first
                 _unitOfWork.Posters.Add(poster);
                 await _unitOfWork.CompleteAsync(ct); // Save to get poster Id
 
-                // Create TicketInfos and individual Tickets
                 foreach (var ticketInfoDto in createDto.TicketInfos)
                 {
-                    // Create TicketInfo
                     var ticketInfo = new TicketInfo
                     {
                         PosterId = poster.Id,
@@ -130,7 +118,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     _unitOfWork.TicketInfos.Add(ticketInfo);
                     await _unitOfWork.CompleteAsync(ct); // Save to get ticketInfo Id
 
-                    // Create individual tickets
                     var tickets = new List<Ticket>();
                     for (int i = 1; i <= ticketInfoDto.TotalCount; i++)
                     {
@@ -149,7 +136,6 @@ namespace BoxOffice.BLL.Services.Implementations
                         tickets.Add(ticket);
                     }
 
-                    // Add all tickets for this ticketInfo
                     _unitOfWork.Tickets.AddRange(tickets);
                     await _unitOfWork.CompleteAsync(ct);
                 }
@@ -164,14 +150,12 @@ namespace BoxOffice.BLL.Services.Implementations
 
             LogPosterCreated(poster.Name, poster.Id);
 
-            // Return created poster with ticket infos
             return await GetByIdAsync(poster.Id, ct);
         }
         private static string GenerateSeatNumber(TicketType ticketType, int seatNumber, int totalSeats)
         {
             string section = ticketType.ToString()[0].ToString();
 
-            // Calculate row and seat
             int seatsPerRow = 20; // 20 seats per row
             int row = (seatNumber - 1) / seatsPerRow + 1;
             int seatInRow = (seatNumber - 1) % seatsPerRow + 1;
@@ -189,10 +173,8 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Poster with id {id} not found");
             }
 
-            // Check if poster has any TicketInfos
             if (poster.TicketInfos.Any())
             {
-                // Check if any tickets exist for this poster
                 var hasTickets = false;
                 var ticketInfos = new List<TicketInfo>();
 
@@ -211,7 +193,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
                 if (hasTickets)
                 {
-                    // Check for sold or booked tickets
                     var soldOrBookedTickets = ticketInfos
                         .SelectMany(ti => ti.Tickets)
                         .Count(t => t.TicketState == TicketState.Sold || t.TicketState == TicketState.Booked);
@@ -223,7 +204,6 @@ namespace BoxOffice.BLL.Services.Implementations
                             "Cancel or process those tickets first.");
                     }
 
-                    // Check for transactions
                     foreach (var ticketInfo in ticketInfos)
                     {
                         foreach (var ticket in ticketInfo.Tickets)
@@ -241,11 +221,9 @@ namespace BoxOffice.BLL.Services.Implementations
                         }
                     }
 
-                    // Start transaction for deleting poster with all related data
                     await _unitOfWork.BeginTransactionAsync(ct);
                     try
                     {
-                        // Delete all tickets
                         foreach (var ticketInfo in ticketInfos)
                         {
                             foreach (var ticket in ticketInfo.Tickets)
@@ -268,7 +246,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 }
                 else
                 {
-                    // No tickets, just delete TicketInfos and poster
                     await _unitOfWork.BeginTransactionAsync(ct);
                     try
                     {
@@ -291,7 +268,6 @@ namespace BoxOffice.BLL.Services.Implementations
             }
             else
             {
-                // No TicketInfos, just delete poster
                 _unitOfWork.Posters.Delete(poster);
                 await _unitOfWork.CompleteAsync(ct);
             }
@@ -302,7 +278,6 @@ namespace BoxOffice.BLL.Services.Implementations
         public async Task<PagedResponse<GetPosterDto>> GetAllAsync(
     SearchPosterDto? dto, int page = 1, int itemsPerPage = 10, CancellationToken ct = default)
         {
-            // Validate and adjust pagination parameters
             if (page < 1)
             {
                 page = 1;
@@ -316,18 +291,14 @@ namespace BoxOffice.BLL.Services.Implementations
                 itemsPerPage = 100;
             }
 
-            // Создаем базовый запрос с Includes
             IQueryable<Poster> query = _unitOfWork.Posters.AsQueryable()
                 .Include(p => p.Author!)
                 .Include(p => p.Genres);
 
-            // Проверяем, нужен ли фильтр по цене
             bool needsPriceFilter = dto != null && (dto.PriceMin.HasValue || dto.PriceMax.HasValue);
 
-            // Применяем фильтры, если они предоставлены
             if (dto != null)
             {
-                // Применяем фильтры к базовому запросу
                 if (!string.IsNullOrWhiteSpace(dto.Name))
                 {
                     query = query.Where(p => p.Name.ToLower().Contains(dto.Name.ToLower()));
@@ -368,7 +339,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     query = query.Where(p => p.Genres.Any(g => dto.Genres.Contains(g.Name)));
                 }
 
-                // Фильтр по цене - добавляем Include для TicketInfos если нужно
                 if (needsPriceFilter)
                 {
                     query = query.Include(p => p.TicketInfos!);
@@ -378,12 +348,10 @@ namespace BoxOffice.BLL.Services.Implementations
                     ));
                 }
 
-                // Применяем сортировку
                 query = ApplySorting(query, dto.SearchCriteria, dto.SortAscending);
             }
             else
             {
-                // Сортировка по умолчанию по дате
                 query = query.OrderByDescending(p => p.Date);
             }
 
@@ -394,7 +362,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 .Take(itemsPerPage)
                 .ToListAsync(ct);
 
-            // Маппим в базовые DTO
             var posterDtos = _mapper.Map<List<GetPosterDto>>(posters);
 
             return new PagedResponse<GetPosterDto>
@@ -477,16 +444,13 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Poster with id {id} not found");
             }
 
-            // Get all tickets for this poster with the specified state
             var allTickets = poster.TicketInfos
                 .SelectMany(ti => ti.Tickets)
                 .Where(t => t.TicketState == state)
                 .ToList();
 
-            // Создаем базовый DTO через AutoMapper
             var basePosterDto = _mapper.Map<GetPosterDto>(poster);
 
-            // Создаем GetPosterWithTicketsDto на основе базового
             var posterDto = new GetPosterWithTicketsDto
             {
                 Id = basePosterDto.Id,
@@ -507,7 +471,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 }
             };
 
-            // Добавляем билеты
             foreach (var ticket in allTickets)
             {
                 var ticketInfo = poster.TicketInfos.First(ti => ti.Id == ticket.TicketInfoId);
@@ -542,7 +505,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Poster with id {id} not found");
             }
 
-            // Calculate statistics
             var stats = new GetPosterStatsDto
             {
                 Id = poster.Id,
@@ -556,13 +518,11 @@ namespace BoxOffice.BLL.Services.Implementations
                 ReportTime = DateTime.UtcNow
             };
 
-            // Aggregate ticket counts
             stats.CountTotal = poster.TicketInfos.Sum(ti => ti.TotalCount);
             stats.CountSold = poster.TicketInfos.Sum(ti => ti.SoldCount);
             stats.CountBooked = poster.TicketInfos.Sum(ti => ti.BookedCount);
             stats.CountAvailable = poster.TicketInfos.Sum(ti => ti.AvailableCount);
 
-            // Calculate revenue (sum of purchase transactions)
             stats.Revenue = poster.TicketInfos
                 .SelectMany(ti => ti.Tickets)
                 .SelectMany(t => t.Transactions)
@@ -584,7 +544,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Poster with id {id} not found");
             }
 
-            // Check if updating name and if new name is unique
             if (!string.IsNullOrWhiteSpace(updateDto.Name)
                 && updateDto.Name != poster.Name)
             {
@@ -598,7 +557,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 }
             }
 
-            // Update Author if provided
             if (updateDto.AuthorId.HasValue)
             {
                 var author = await _unitOfWork.Authors.GetByIdAsync(updateDto.AuthorId.Value, ct);
@@ -609,7 +567,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 poster.Author = author;
             }
 
-            // Update genres if provided
             if (updateDto.Genres != null)
             {
                 var newGenres = new List<Genre>();
@@ -628,7 +585,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 poster.Genres = newGenres;
             }
 
-            // Update other properties if provided
             if (!string.IsNullOrWhiteSpace(updateDto.Name))
             {
                 poster.Name = updateDto.Name.Trim();
@@ -667,7 +623,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
             LogPosterUpdated(poster.Name, poster.Id);
 
-            // Return basic DTO
             var result = _mapper.Map<GetPosterDto>(poster);
             result.Author = poster.Author?.Name ?? string.Empty;
             result.Genres = poster.Genres.Select(g => g.Name).ToList();
@@ -689,12 +644,10 @@ namespace BoxOffice.BLL.Services.Implementations
             await _unitOfWork.BeginTransactionAsync(ct);
             try
             {
-                // Если есть TicketInfos, удаляем каскадно все связанные сущности
                 if (poster.TicketInfos.Any())
                 {
                     foreach (var ticketInfo in poster.TicketInfos)
                     {
-                        // Загружаем полную информацию о TicketInfo с билетами
                         var fullTicketInfo = await _unitOfWork.TicketInfos
                             .GetByIdAsync(ticketInfo.Id, ct,
                                 includes: ti => ti.Tickets!);
@@ -703,40 +656,33 @@ namespace BoxOffice.BLL.Services.Implementations
                         {
                             foreach (var ticket in fullTicketInfo.Tickets)
                             {
-                                // Загружаем транзакции для билета
                                 var ticketWithTransactions = await _unitOfWork.Tickets
                                     .GetByIdAsync(ticket.Id, ct,
                                         t => t.Transactions!,
                                         t => t.Booking!);
 
-                                // Удаляем связанные сущности билета
                                 if (ticketWithTransactions != null)
                                 {
-                                    // Удаляем транзакции
                                     if (ticketWithTransactions.Transactions.Any())
                                     {
                                         _unitOfWork.Transactions.DeleteRange(
                                             ticketWithTransactions.Transactions.ToList());
                                     }
 
-                                    // Удаляем бронирование если есть
                                     if (ticketWithTransactions.Booking != null)
                                     {
                                         _unitOfWork.Bookings.Delete(ticketWithTransactions.Booking);
                                     }
 
-                                    // Удаляем сам билет
                                     _unitOfWork.Tickets.Delete(ticketWithTransactions);
                                 }
                             }
                         }
 
-                        // Удаляем TicketInfo
                         _unitOfWork.TicketInfos.Delete(fullTicketInfo ?? ticketInfo);
                     }
                 }
 
-                // Удаляем сам постер
                 _unitOfWork.Posters.Delete(poster);
 
                 await _unitOfWork.CompleteAsync(ct);

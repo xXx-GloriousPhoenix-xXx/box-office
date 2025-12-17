@@ -34,14 +34,12 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<GetTicketDto> AddAsync(CreateTicketDto createDto, CancellationToken ct = default)
         {
-            // Check if TicketInfo exists
             var ticketInfo = await _unitOfWork.TicketInfos.GetByIdAsync(createDto.TicketInfoId, ct);
             if (ticketInfo == null)
             {
                 throw new NotFoundException($"TicketInfo with id {createDto.TicketInfoId} not found");
             }
 
-            // Check if seat is already taken for this TicketInfo
             var seatExists = await _unitOfWork.Tickets
                 .ExistsAsync(t => t.TicketInfoId == createDto.TicketInfoId
                     && t.SeatNumber.ToLower() == createDto.SeatNumber.ToLower(), ct);
@@ -51,7 +49,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new ValidationException($"Seat '{createDto.SeatNumber}' is already taken for this event");
             }
 
-            // Check if available tickets exist
             if (ticketInfo.AvailableCount <= 0)
             {
                 throw new BusinessException("No available tickets for this event");
@@ -60,7 +57,6 @@ namespace BoxOffice.BLL.Services.Implementations
             var ticket = _mapper.Map<Ticket>(createDto);
             ticket.TicketState = TicketState.Available;
 
-            // Update TicketInfo counts
             ticketInfo.AvailableCount--;
             ticketInfo.TotalCount++;
 
@@ -96,7 +92,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Ticket with id {id} not found");
             }
 
-            // Check if ticket has transactions
             if (ticket.Transactions.Count > 0)
             {
                 throw new BusinessException(
@@ -104,7 +99,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     "Delete related transactions first.");
             }
 
-            // Check if ticket is sold or booked
             if (ticket.TicketState == TicketState.Sold || ticket.TicketState == TicketState.Booked)
             {
                 throw new BusinessException(
@@ -115,7 +109,6 @@ namespace BoxOffice.BLL.Services.Implementations
             await _unitOfWork.BeginTransactionAsync(ct);
             try
             {
-                // Update TicketInfo counts if ticket is in Available state
                 if (ticket.TicketState == TicketState.Available && ticket.TicketInfo != null)
                 {
                     ticket.TicketInfo.AvailableCount++;
@@ -139,7 +132,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<PagedResponse<GetTicketDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default)
         {
-            // Validate and adjust pagination parameters
             if (page < 1)
             {
                 page = 1;
@@ -204,7 +196,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Ticket with id {id} not found");
             }
 
-            // Validate ticket state
             if (ticket.TicketState != TicketState.Available && ticket.TicketState != TicketState.Booked)
             {
                 throw new BusinessException(
@@ -212,7 +203,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     "Ticket must be Available or Booked.");
             }
 
-            // If ticket was booked, check if booking is still valid
             if (ticket.TicketState == TicketState.Booked && ticket.BookingId.HasValue)
             {
                 var booking = await _unitOfWork.Bookings.GetByIdAsync(ticket.BookingId.Value, ct);
@@ -225,11 +215,9 @@ namespace BoxOffice.BLL.Services.Implementations
             await _unitOfWork.BeginTransactionAsync(ct);
             try
             {
-                // Update ticket state
                 ticket.TicketState = TicketState.Sold;
                 ticket.SoldDate = DateOnly.FromDateTime(DateTime.UtcNow);
 
-                // Update TicketInfo counts
                 if (ticket.TicketInfo != null)
                 {
                     if (ticket.TicketState == TicketState.Booked)
@@ -241,7 +229,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     _unitOfWork.TicketInfos.Update(ticket.TicketInfo);
                 }
 
-                // If there was a booking, update its state
                 if (ticket.BookingId.HasValue)
                 {
                     var booking = await _unitOfWork.Bookings.GetByIdAsync(ticket.BookingId.Value, ct);
@@ -280,13 +267,11 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Ticket with id {id} not found");
             }
 
-            // Validate ticket state
             if (ticket.TicketState != TicketState.Sold)
             {
                 throw new BusinessException($"Cannot cancel purchase for ticket in '{ticket.TicketState}' state.");
             }
 
-            // Check if ticket has transactions
             if (ticket.Transactions.Count > 0)
             {
                 throw new BusinessException(
@@ -297,12 +282,10 @@ namespace BoxOffice.BLL.Services.Implementations
             await _unitOfWork.BeginTransactionAsync(ct);
             try
             {
-                // Update ticket state
                 ticket.TicketState = TicketState.Available;
                 ticket.SoldDate = null;
                 ticket.CustomerId = null;
 
-                // Update TicketInfo counts
                 if (ticket.TicketInfo != null)
                 {
                     ticket.TicketInfo.SoldCount--;

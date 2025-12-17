@@ -34,7 +34,6 @@ namespace BoxOffice.DAL.Context
         }
         private void SeedData(ModelBuilder modelBuilder)
         {
-            // ==== 1. ЖАНРЫ (статичные GUID) ====
             var dramaId = new Guid("11111111-1111-1111-1111-111111111111");
             var comedyId = new Guid("22222222-2222-2222-2222-222222222222");
             var tragedyId = new Guid("33333333-3333-3333-3333-333333333333");
@@ -57,7 +56,6 @@ namespace BoxOffice.DAL.Context
                 new Genre { Id = satireId, Name = "Satire" }
             );
 
-            // ==== 2. АВТОРЫ ====
             var shakespeareId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
             var chekhovId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
             var williamsId = new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc");
@@ -74,7 +72,6 @@ namespace BoxOffice.DAL.Context
                 new Author { Id = moliereId, Name = "Molière" }
             );
 
-            // ==== 3. ПОСТЕРЫ (спектакли) ====
             var hamletId = new Guid("aaaaaaaa-1111-1111-1111-111111111111");
             var romeoId = new Guid("aaaaaaaa-2222-2222-2222-222222222222");
             var seagullId = new Guid("bbbbbbbb-1111-1111-1111-111111111111");
@@ -156,37 +153,28 @@ namespace BoxOffice.DAL.Context
                 }
             );
 
-            // ==== 4. СВЯЗИ ПОСТЕРОВ С ЖАНРАМИ ====
             modelBuilder.Entity("poster_genres")
                 .HasData(
-                    // Hamlet - Drama, Tragedy
                     new { poster_id = hamletId, genre_id = dramaId },
                     new { poster_id = hamletId, genre_id = tragedyId },
 
-                    // Romeo and Juliet - Tragedy, Romance
                     new { poster_id = romeoId, genre_id = tragedyId },
                     new { poster_id = romeoId, genre_id = romanceId },
 
-                    // The Seagull - Drama
                     new { poster_id = seagullId, genre_id = dramaId },
 
-                    // The Cherry Orchard - Drama, Satire
                     new { poster_id = cherryId, genre_id = dramaId },
                     new { poster_id = cherryId, genre_id = satireId },
 
-                    // A Streetcar Named Desire - Drama
                     new { poster_id = streetcarId, genre_id = dramaId },
 
-                    // Death of a Salesman - Drama, Tragedy
                     new { poster_id = salesmanId, genre_id = dramaId },
                     new { poster_id = salesmanId, genre_id = tragedyId },
 
-                    // The Miser - Comedy, Satire
                     new { poster_id = miserId, genre_id = comedyId },
                     new { poster_id = miserId, genre_id = satireId }
                 );
 
-            // ==== 5. ПОКУПАТЕЛИ ====
             var customer1Id = new Guid("11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
             var customer2Id = new Guid("22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
             var customer3Id = new Guid("33333333-cccc-cccc-cccc-cccccccccccc");
@@ -201,7 +189,6 @@ namespace BoxOffice.DAL.Context
                 new Customer { Id = customer5Id, Name = "Robert Wilson", Email = "robert.wilson@example.com", Phone = "+1-555-0105" }
             );
 
-            // ==== 6. ИНФОРМАЦИЯ О БИЛЕТАХ ====
             var hamletEconomyId = new Guid("aaaaaaaa-1111-aaaa-aaaa-aaaaaaaaaaaa");
             var hamletVipId = new Guid("aaaaaaaa-2222-bbbb-bbbb-bbbbbbbbbbbb");
             var romeoEconomyId = new Guid("bbbbbbbb-1111-cccc-cccc-cccccccccccc");
@@ -254,14 +241,12 @@ namespace BoxOffice.DAL.Context
                 }
             );
 
-            // ==== 7. БИЛЕТЫ ====
             var ticket1Id = new Guid("11111111-1111-1111-aaaa-aaaaaaaaaaaa");
             var ticket2Id = new Guid("22222222-2222-2222-bbbb-bbbbbbbbbbbb");
             var ticket3Id = new Guid("33333333-3333-3333-cccc-cccccccccccc");
             var ticket4Id = new Guid("44444444-4444-4444-dddd-dddddddddddd");
             var ticket5Id = new Guid("55555555-5555-5555-eeee-eeeeeeeeeeee");
 
-            // ==== 8. БРОНИРОВАНИЯ ====
             var booking1Id = new Guid("aaaaaaaa-1111-bbbb-cccc-dddddddddddd");
             var booking2Id = new Guid("bbbbbbbb-2222-cccc-dddd-eeeeeeeeeeee");
 
@@ -336,7 +321,6 @@ namespace BoxOffice.DAL.Context
                 }
             );
 
-            // ==== 9. ТРАНЗАКЦИИ ====
             var transaction1Id = new Guid("11111111-aaaa-bbbb-cccc-dddddddddddd");
             var transaction2Id = new Guid("22222222-bbbb-cccc-dddd-eeeeeeeeeeee");
             var transaction3Id = new Guid("33333333-cccc-dddd-eeee-ffffffffffff");

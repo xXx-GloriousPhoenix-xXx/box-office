@@ -31,7 +31,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<GetBookingDto> AddAsync(CreateBookingDto createDto, CancellationToken ct = default)
         {
-            // Validate Ticket exists
             var ticket = await _unitOfWork.Tickets
                 .GetByIdAsync(createDto.TicketId, ct,
                     includes: t => t.TicketInfo!);
@@ -41,7 +40,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Ticket with id {createDto.TicketId} not found");
             }
 
-            // Check if ticket is already booked
             if (ticket.BookingId.HasValue)
             {
                 var existingBooking = await _unitOfWork.Bookings.GetByIdAsync(ticket.BookingId.Value, ct);
@@ -51,7 +49,6 @@ namespace BoxOffice.BLL.Services.Implementations
                 }
             }
 
-            // Check if ticket is available for booking
             if (ticket.TicketState != TicketState.Available)
             {
                 throw new BusinessException(
@@ -59,7 +56,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     "Ticket must be available for booking.");
             }
 
-            // Generate unique booking token
             string bookingToken;
             bool tokenExists;
             int attempts = 0;
@@ -90,16 +86,13 @@ namespace BoxOffice.BLL.Services.Implementations
             await _unitOfWork.BeginTransactionAsync(ct);
             try
             {
-                // Add booking
                 _unitOfWork.Bookings.Add(booking);
                 await _unitOfWork.CompleteAsync(ct); // Save to get booking Id
 
-                // Update ticket
                 ticket.BookingId = booking.Id;
                 ticket.TicketState = TicketState.Booked;
                 _unitOfWork.Tickets.Update(ticket);
 
-                // Update TicketInfo counts
                 if (ticket.TicketInfo != null)
                 {
                     ticket.TicketInfo.BookedCount++;
@@ -123,14 +116,12 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<GetBookingDto> BookAsync(Guid ticketId, CancellationToken ct = default)
         {
-            // This is a convenience method that creates a booking for a ticket
             var createDto = new CreateBookingDto { TicketId = ticketId };
             return await AddAsync(createDto, ct);
         }
 
         public async Task CancelBookingAsync(Guid ticketId, CancellationToken ct = default)
         {
-            // Find ticket with booking
             var ticket = await _unitOfWork.Tickets
                 .GetByIdAsync(ticketId, ct,
                     t => t.Booking,
@@ -148,7 +139,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
             var booking = ticket.Booking;
 
-            // Check booking state
             if (booking.State != BookingState.Active)
             {
                 throw new BusinessException($"Cannot cancel booking in '{booking.State}' state.");
@@ -157,16 +147,13 @@ namespace BoxOffice.BLL.Services.Implementations
             await _unitOfWork.BeginTransactionAsync(ct);
             try
             {
-                // Update booking state
                 booking.State = BookingState.Cancelled;
                 _unitOfWork.Bookings.Update(booking);
 
-                // Update ticket state
                 ticket.TicketState = TicketState.Available;
                 ticket.BookingId = null;
                 _unitOfWork.Tickets.Update(ticket);
 
-                // Update TicketInfo counts
                 if (ticket.TicketInfo != null)
                 {
                     ticket.TicketInfo.BookedCount--;
@@ -197,20 +184,17 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new NotFoundException($"Booking with id {id} not found");
             }
 
-            // Check if booking is active
             if (booking.State == BookingState.Active)
             {
                 throw new BusinessException(
                     "Cannot delete active booking. Cancel it first.");
             }
 
-            // Check if ticket exists and has this booking
             if (booking.Ticket != null)
             {
                 await _unitOfWork.BeginTransactionAsync(ct);
                 try
                 {
-                    // Remove booking reference from ticket if it exists
                     if (booking.Ticket.BookingId == booking.Id)
                     {
                         booking.Ticket.BookingId = null;
@@ -230,7 +214,6 @@ namespace BoxOffice.BLL.Services.Implementations
             }
             else
             {
-                // Just delete the booking if no ticket reference
                 _unitOfWork.Bookings.Delete(booking);
                 await _unitOfWork.CompleteAsync(ct);
             }
@@ -240,7 +223,6 @@ namespace BoxOffice.BLL.Services.Implementations
 
         public async Task<PagedResponse<GetBookingDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default)
         {
-            // Validate and adjust pagination parameters
             if (page < 1)
             {
                 page = 1;
@@ -292,7 +274,6 @@ namespace BoxOffice.BLL.Services.Implementations
             return _mapper.Map<GetBookingDto>(booking);
         }
 
-        // Additional method to check and expire old bookings
         public async Task<int> ExpireOldBookingsAsync(CancellationToken ct = default)
         {
             var today = DateOnly.FromDateTime(DateTime.UtcNow);
@@ -316,7 +297,6 @@ namespace BoxOffice.BLL.Services.Implementations
                     booking.State = BookingState.Expired;
                     _unitOfWork.Bookings.Update(booking);
 
-                    // Update associated ticket if exists
                     var ticket = await _unitOfWork.Tickets
                         .GetByIdAsync(booking.TicketId, ct,
                             includes: t => t.TicketInfo!);
@@ -327,7 +307,6 @@ namespace BoxOffice.BLL.Services.Implementations
                         ticket.BookingId = null;
                         _unitOfWork.Tickets.Update(ticket);
 
-                        // Update TicketInfo counts
                         if (ticket.TicketInfo != null)
                         {
                             ticket.TicketInfo.BookedCount--;
@@ -352,7 +331,6 @@ namespace BoxOffice.BLL.Services.Implementations
             }
         }
 
-        // Additional method to get booking by token
         public async Task<GetBookingDto> GetByTokenAsync(string token, CancellationToken ct = default)
         {
             var booking = await _unitOfWork.Bookings
