@@ -1,4 +1,6 @@
-﻿namespace BoxOffice.DAL.Models.Enums
+﻿using System.Text.Json.Serialization;
+
+namespace BoxOffice.DAL.Models.Enums
 {
     public enum TicketType
     {

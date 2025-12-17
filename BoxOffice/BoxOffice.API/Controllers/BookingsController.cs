@@ -1,4 +1,5 @@
 ﻿using BoxOffice.BLL.DTOs.AdditionalDtos;
+using BoxOffice.BLL.DTOs.AdditionalDtos.OperationDtos;
 using BoxOffice.BLL.DTOs.BookingDtos;
 using BoxOffice.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -23,31 +24,17 @@ namespace BoxOffice.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<GetBookingDto>> AddAsync([FromForm] CreateBookingDto dto, CancellationToken ct)
-        {
-            var result = await service.AddAsync(dto, ct);
-            return Ok(result);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(Guid id, CancellationToken ct)
-        {
-            await service.DeleteAsync(id, ct);
-            return Ok();
-        }
-
         [HttpPost("book/{ticketId}")]
-        public async Task<ActionResult<GetBookingDto>> BookAsync(Guid ticketId, CancellationToken ct)
+        public async Task<ActionResult<GetBookingDto>> BookAsync(Guid ticketId, [FromForm] BookingDto dto, CancellationToken ct)
         {
-            var result = service.BookAsync(ticketId, ct);
+            var result = await service.BookAsync(ticketId, dto, ct);
             return Ok(result);
         }
 
         [HttpPost("cancel/{ticketId}")]
-        public async Task<IActionResult> CancelAsync(Guid ticketId, CancellationToken ct)
+        public async Task<IActionResult> CancelAsync(Guid ticketId, [FromForm] CancelBookingDto dto, CancellationToken ct)
         {
-            await service.CancelBookingAsync(ticketId, ct);
+            await service.CancelBookingAsync(ticketId, dto, ct);
             return Ok();
         }
     }

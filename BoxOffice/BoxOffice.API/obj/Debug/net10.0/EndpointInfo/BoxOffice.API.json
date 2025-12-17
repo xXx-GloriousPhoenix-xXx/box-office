@@ -354,79 +354,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Bookings"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/bookings": {
-      "post": {
-        "tags": [
-          "Bookings"
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "required": [
-                  "TicketId"
-                ],
-                "type": "object",
-                "properties": {
-                  "TicketId": {
-                    "type": "string",
-                    "format": "uuid"
-                  }
-                }
-              },
-              "encoding": {
-                "TicketId": {
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetBookingDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetBookingDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetBookingDto"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/api/bookings/book/{ticketId}": {
@@ -445,6 +372,29 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "CustomerId"
+                ],
+                "type": "object",
+                "properties": {
+                  "CustomerId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "encoding": {
+                "CustomerId": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -485,6 +435,29 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "CustomerId"
+                ],
+                "type": "object",
+                "properties": {
+                  "CustomerId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "encoding": {
+                "CustomerId": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1914,6 +1887,36 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "CustomerId",
+                  "PaymentMethod"
+                ],
+                "type": "object",
+                "properties": {
+                  "PaymentMethod": {
+                    "$ref": "#/components/schemas/PaymentMethod"
+                  },
+                  "CustomerId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "encoding": {
+                "PaymentMethod": {
+                  "style": "form"
+                },
+                "CustomerId": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -1954,6 +1957,29 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "CustomerId"
+                ],
+                "type": "object",
+                "properties": {
+                  "CustomerId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "encoding": {
+                "CustomerId": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -3241,10 +3267,10 @@
       },
       "PaymentMethod": {
         "enum": [
-          "card-online",
-          "card-at-venue",
-          "cash-at-venue",
-          "e-wallet",
+          "cardOnline",
+          "cardAtVenue",
+          "cashAtVenue",
+          "eWallet",
           "mobile"
         ],
         "type": "string"
@@ -3273,8 +3299,8 @@
         "enum": [
           "economy",
           "standard",
-          "premium-seat",
-          "front-row",
+          "premiumSeat",
+          "frontRow",
           "balcony",
           "vip"
         ],
@@ -3284,7 +3310,7 @@
         "enum": [
           "purchase",
           "refund",
-          "booking-fee",
+          "bookingFee",
           "cancellation"
         ],
         "type": "string"

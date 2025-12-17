@@ -1,4 +1,5 @@
 ﻿using BoxOffice.BLL.DTOs.AdditionalDtos;
+using BoxOffice.BLL.DTOs.AdditionalDtos.OperationDtos;
 using BoxOffice.BLL.DTOs.TicketDtos;
 using BoxOffice.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -31,16 +32,16 @@ namespace BoxOffice.API.Controllers
         }
 
         [HttpPost("{id}/purchase")]
-        public async Task<ActionResult<GetTicketDto>> PurchaseAsync(Guid id, CancellationToken ct)
+        public async Task<ActionResult<GetTicketDto>> PurchaseAsync(Guid id, [FromForm] PurchaseDto dto, CancellationToken ct)
         {
-            var result = await service.PurchaseAsync(id, ct);
+            var result = await service.PurchaseAsync(id, dto, ct);
             return Ok(result);
         }
 
         [HttpPost("{id}/cancel")]
-        public async Task<ActionResult<GetTicketDto>> CancelPurchaseAsync(Guid id, CancellationToken ct)
+        public async Task<ActionResult<GetTicketDto>> CancelPurchaseAsync(Guid id, [FromForm] CancelPurcaseDto dto, CancellationToken ct)
         {
-            var result = await service.CancelPurchaseAsync(id, ct);
+            var result = await service.CancelPurchaseAsync(id, dto, ct);
             return Ok(result);
         }
     }

@@ -157,32 +157,6 @@
   },
   {
     "ContainingType": "BoxOffice.API.Controllers.BookingsController",
-    "Method": "AddAsync",
-    "RelativePath": "api/bookings",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "TicketId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BoxOffice.BLL.DTOs.BookingDtos.GetBookingDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BoxOffice.API.Controllers.BookingsController",
     "Method": "GetByIdAsync",
     "RelativePath": "api/bookings/{id}",
     "HttpMethod": "GET",
@@ -206,22 +180,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "BoxOffice.API.Controllers.BookingsController",
-    "Method": "DeleteAsync",
-    "RelativePath": "api/bookings/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "BoxOffice.API.Controllers.BookingsController",
@@ -266,6 +224,11 @@
         "Name": "ticketId",
         "Type": "System.Guid",
         "IsRequired": true
+      },
+      {
+        "Name": "CustomerId",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -292,6 +255,11 @@
         "Name": "ticketId",
         "Type": "System.Guid",
         "IsRequired": true
+      },
+      {
+        "Name": "CustomerId",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1135,6 +1103,11 @@
         "Name": "id",
         "Type": "System.Guid",
         "IsRequired": true
+      },
+      {
+        "Name": "CustomerId",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -1161,6 +1134,16 @@
         "Name": "id",
         "Type": "System.Guid",
         "IsRequired": true
+      },
+      {
+        "Name": "PaymentMethod",
+        "Type": "BoxOffice.DAL.Models.Enums.PaymentMethod",
+        "IsRequired": false
+      },
+      {
+        "Name": "CustomerId",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [

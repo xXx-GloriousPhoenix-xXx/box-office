@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BoxOffice.BLL.DTOs.AdditionalDtos;
+using BoxOffice.BLL.DTOs.AdditionalDtos.OperationDtos;
 using BoxOffice.BLL.DTOs.BookingDtos;
 using BoxOffice.BLL.Exceptions;
 using BoxOffice.BLL.Services.Interfaces;
@@ -29,15 +30,15 @@ namespace BoxOffice.BLL.Services.Implementations
         [LoggerMessage(LogLevel.Information, "Booking deleted: ID: {Id}")]
         partial void LogBookingDeleted(Guid id);
 
-        public async Task<GetBookingDto> AddAsync(CreateBookingDto createDto, CancellationToken ct = default)
+        public async Task<GetBookingDto> BookAsync(Guid ticketId, BookingDto dto, CancellationToken ct = default)
         {
             var ticket = await _unitOfWork.Tickets
-                .GetByIdAsync(createDto.TicketId, ct,
+                .GetByIdAsync(ticketId, ct,
                     includes: t => t.TicketInfo!);
 
             if (ticket is null)
             {
-                throw new NotFoundException($"Ticket with id {createDto.TicketId} not found");
+                throw new NotFoundException($"Ticket with id {ticketId} not found");
             }
 
             if (ticket.BookingId.HasValue)
@@ -80,8 +81,10 @@ namespace BoxOffice.BLL.Services.Implementations
                 ExpiresAt = DateOnly.FromDateTime(DateTime.UtcNow.AddHours(48)), // 48 hours booking
                 BookingToken = bookingToken,
                 State = BookingState.Active,
-                TicketId = createDto.TicketId
+                TicketId = ticketId
             };
+
+            ticket.CustomerId = dto.CustomerId;
 
             await _unitOfWork.BeginTransactionAsync(ct);
             try
@@ -114,13 +117,7 @@ namespace BoxOffice.BLL.Services.Implementations
             return _mapper.Map<GetBookingDto>(booking);
         }
 
-        public async Task<GetBookingDto> BookAsync(Guid ticketId, CancellationToken ct = default)
-        {
-            var createDto = new CreateBookingDto { TicketId = ticketId };
-            return await AddAsync(createDto, ct);
-        }
-
-        public async Task CancelBookingAsync(Guid ticketId, CancellationToken ct = default)
+        public async Task CancelBookingAsync(Guid ticketId, CancelBookingDto dto, CancellationToken ct = default)
         {
             var ticket = await _unitOfWork.Tickets
                 .GetByIdAsync(ticketId, ct,
@@ -144,9 +141,15 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new BusinessException($"Cannot cancel booking in '{booking.State}' state.");
             }
 
+            if (ticket.CustomerId != dto.CustomerId)
+            {
+                throw new BusinessException("Cannot cancel booking, made by another customer");
+            }
+
             await _unitOfWork.BeginTransactionAsync(ct);
             try
             {
+                ticket.CustomerId = null;
                 booking.State = BookingState.Cancelled;
                 _unitOfWork.Bookings.Update(booking);
 
@@ -171,54 +174,6 @@ namespace BoxOffice.BLL.Services.Implementations
             }
 
             LogBookingUpdated(booking.Id, booking.State);
-        }
-
-        public async Task DeleteAsync(Guid id, CancellationToken ct = default)
-        {
-            var booking = await _unitOfWork.Bookings
-                .GetByIdAsync(id, ct,
-                    includes: b => b.Ticket!);
-
-            if (booking is null)
-            {
-                throw new NotFoundException($"Booking with id {id} not found");
-            }
-
-            if (booking.State == BookingState.Active)
-            {
-                throw new BusinessException(
-                    "Cannot delete active booking. Cancel it first.");
-            }
-
-            if (booking.Ticket != null)
-            {
-                await _unitOfWork.BeginTransactionAsync(ct);
-                try
-                {
-                    if (booking.Ticket.BookingId == booking.Id)
-                    {
-                        booking.Ticket.BookingId = null;
-                        _unitOfWork.Tickets.Update(booking.Ticket);
-                    }
-
-                    _unitOfWork.Bookings.Delete(booking);
-
-                    await _unitOfWork.CompleteAsync(ct);
-                    await _unitOfWork.CommitTransactionAsync(ct);
-                }
-                catch
-                {
-                    await _unitOfWork.RollbackTransactionAsync(ct);
-                    throw;
-                }
-            }
-            else
-            {
-                _unitOfWork.Bookings.Delete(booking);
-                await _unitOfWork.CompleteAsync(ct);
-            }
-
-            LogBookingDeleted(booking.Id);
         }
 
         public async Task<PagedResponse<GetBookingDto>> GetAllAsync(int page = 1, int itemsPerPage = 10, CancellationToken ct = default)

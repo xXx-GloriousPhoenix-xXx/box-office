@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BoxOffice.BLL.DTOs.AdditionalDtos;
+using BoxOffice.BLL.DTOs.AdditionalDtos.OperationDtos;
 using BoxOffice.BLL.DTOs.TicketDtos;
 using BoxOffice.BLL.Exceptions;
 using BoxOffice.BLL.Services.Interfaces;
@@ -185,7 +186,7 @@ namespace BoxOffice.BLL.Services.Implementations
             return _mapper.Map<GetTicketDto>(ticket);
         }
 
-        public async Task<GetTicketDto> PurchaseAsync(Guid id, CancellationToken ct = default)
+        public async Task<GetTicketDto> PurchaseAsync(Guid id, PurchaseDto dto, CancellationToken ct = default)
         {
             var ticket = await _unitOfWork.Tickets
                 .GetByIdAsync(id, ct,
@@ -205,6 +206,11 @@ namespace BoxOffice.BLL.Services.Implementations
 
             if (ticket.TicketState == TicketState.Booked && ticket.BookingId.HasValue)
             {
+                if (dto.CustomerId != ticket.CustomerId)
+                {
+                    throw new BusinessException("Ticket is booked by another user");
+                }
+
                 var booking = await _unitOfWork.Bookings.GetByIdAsync(ticket.BookingId.Value, ct);
                 if (booking == null || booking.State != BookingState.Active || booking.ExpiresAt < DateOnly.FromDateTime(DateTime.UtcNow))
                 {
@@ -217,6 +223,7 @@ namespace BoxOffice.BLL.Services.Implementations
             {
                 ticket.TicketState = TicketState.Sold;
                 ticket.SoldDate = DateOnly.FromDateTime(DateTime.UtcNow);
+                ticket.CustomerId = dto.CustomerId;
 
                 if (ticket.TicketInfo != null)
                 {
@@ -255,7 +262,7 @@ namespace BoxOffice.BLL.Services.Implementations
             return _mapper.Map<GetTicketDto>(ticket);
         }
 
-        public async Task<GetTicketDto> CancelPurchaseAsync(Guid id, CancellationToken ct = default)
+        public async Task<GetTicketDto> CancelPurchaseAsync(Guid id, CancelPurcaseDto dto, CancellationToken ct = default)
         {
             var ticket = await _unitOfWork.Tickets
                 .GetByIdAsync(id, ct,
@@ -277,6 +284,11 @@ namespace BoxOffice.BLL.Services.Implementations
                 throw new BusinessException(
                     $"Cannot cancel purchase for ticket with {ticket.Transactions.Count} transactions. " +
                     "Refund or delete transactions first.");
+            }
+
+            if (dto.CustomerId != ticket.CustomerId)
+            {
+                throw new BusinessException("Cannot cancel purchase for ticket bought by another customer");
             }
 
             await _unitOfWork.BeginTransactionAsync(ct);
